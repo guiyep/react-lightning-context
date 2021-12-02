@@ -1,2 +1,3 @@
-# react-lightning-context
-a super performant react context
+# react lightning context
+
+A super performant React context
