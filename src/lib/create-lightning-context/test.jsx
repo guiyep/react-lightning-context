@@ -5,7 +5,7 @@ import { flush } from '../pubsub/index';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
-describe.only('createLightningContext', () => {
+describe('createLightningContext', () => {
   beforeEach(() => {
     flush();
   });
@@ -74,6 +74,7 @@ describe.only('createLightningContext', () => {
     fireEvent.click(button);
 
     await waitFor(() => screen.getByTestId('test'));
+    await 
 
     expect(screen.getByTestId('test')).toHaveTextContent('333');
 

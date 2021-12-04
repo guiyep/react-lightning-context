@@ -27,6 +27,7 @@
     "build-storybook": "build-storybook"
   },
   "devDependencies": {
+    "@atlaskit/button": "^16.1.4",
     "@babel/core": "7.16.0",
     "@babel/plugin-transform-runtime": "7.16.4",
     "@babel/preset-env": "^7.16.4",
@@ -86,6 +87,7 @@
   },
   "dependencies": {
     "@testing-library/react": "^12.1.2",
+    "lodash.debounce": "^4.0.8",
     "lodash.get": "^4.4.2"
   },
   "browserslist": [

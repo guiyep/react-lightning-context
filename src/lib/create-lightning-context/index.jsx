@@ -2,16 +2,19 @@ import get from 'lodash.get';
 import { initialize, publish } from '../pubsub';
 import { INTERNAL } from '../constants';
 import { useInternalContext } from '../../hook/useInternalContext';
+import { useDebouncedCallback as useDebouncedCallbackHook } from '../../hook/useDebouncedCallback';
 import React, { useCallback, useContext, useLayoutEffect, useEffect, useMemo, useState, useRef } from 'react';
 
-const useDebouncedCallback = (f) => (val) => f(val);
+const useDebouncedDisabledCallback = (f) => (val) => f(val);
 
-export const createLightningContext = (defaultValue) => {
+export const createLightningContext = (defaultValue, { waitBeforeUpdate } = { waitBeforeUpdate: false }) => {
   const InternalContext = React.createContext({
     queueId: undefined,
     addLightning: () => {},
     removeLightning: () => {},
   });
+
+  const useDebouncedCallback = !waitBeforeUpdate ? useDebouncedDisabledCallback : useDebouncedCallbackHook;
 
   return {
     Provider: ({ children }) => {
@@ -73,7 +76,7 @@ export const createLightningContext = (defaultValue) => {
         }
 
         valueRef.current = nextValue;
-      }, 250);
+      }, waitBeforeUpdate);
 
       return <InternalContext.Provider value={contextRef.current}>{children}</InternalContext.Provider>;
     },
