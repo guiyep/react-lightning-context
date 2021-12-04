@@ -1,31 +1,31 @@
 import React from 'react';
-import { useBindingContextMutator } from './index';
-import { useBindingContext } from '../useBindingContext';
-import { createContext } from '../../lib/create-context';
+import { useLightningContextMutator } from './index';
+import { useLightningContext } from '../useLightningContext';
+import { createLightningContext } from '../../lib/create-lightning-context';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
-describe('useBindingContextMutator', () => {
+describe('useLightningContextMutator', () => {
   test('to not trigger uneeded updates', async () => {
-    const Context = createContext({ valA: 123, valB: 222 });
+    const Context = createLightningContext({ valA: 123, valB: 222 });
 
     let numberOfRendersA = 0;
     let numberOfRendersB = 0;
 
-    const UseBindingContextComponentA = () => {
-      const { valA } = useBindingContext({ binds: ['valA'] }, Context);
+    const UseLightningContextComponentA = () => {
+      const { valA } = useLightningContext({ binds: ['valA'] }, Context);
       numberOfRendersA++;
       return <label data-testid="testA">{valA}</label>;
     };
 
-    const UseBindingContextComponentB = () => {
-      const { valB } = useBindingContext({ binds: ['valB'] }, Context);
+    const UseLightningContextComponentB = () => {
+      const { valB } = useLightningContext({ binds: ['valB'] }, Context);
       numberOfRendersB++;
       return <label data-testid="testB">{valB}</label>;
     };
 
-    const UseBindingContextMutatorComponent = () => {
-      const setContextValue = useBindingContextMutator(Context);
+    const UseLightningContextMutatorComponent = () => {
+      const setContextValue = useLightningContextMutator(Context);
       return <button onClick={() => setContextValue(() => ({ valA: 333, valB: 222, dummy: numberOfRendersA + 1 }))} />;
     };
 
@@ -33,9 +33,9 @@ describe('useBindingContextMutator', () => {
       return (
         <>
           <Context.Provider>
-            <UseBindingContextMutatorComponent />
-            <UseBindingContextComponentA />
-            <UseBindingContextComponentB />
+            <UseLightningContextMutatorComponent />
+            <UseLightningContextComponentA />
+            <UseLightningContextComponentB />
           </Context.Provider>
         </>
       );
@@ -58,12 +58,12 @@ describe('useBindingContextMutator', () => {
   });
 
   test('mutator to pass value', async () => {
-    const Context = createContext({ valA: 123, valB: 222 });
+    const Context = createLightningContext({ valA: 123, valB: 222 });
 
     let valueRef;
 
-    const UseBindingContextMutatorComponent = () => {
-      const setContextValue = useBindingContextMutator(Context);
+    const UseLightningContextMutatorComponent = () => {
+      const setContextValue = useLightningContextMutator(Context);
       return (
         <button
           onClick={() =>
@@ -80,7 +80,7 @@ describe('useBindingContextMutator', () => {
       return (
         <>
           <Context.Provider>
-            <UseBindingContextMutatorComponent />
+            <UseLightningContextMutatorComponent />
           </Context.Provider>
         </>
       );

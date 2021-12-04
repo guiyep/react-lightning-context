@@ -1,24 +1,24 @@
 import React from 'react';
-import { useBindingContext } from './index';
-import { createContext } from '../../lib/create-context';
+import { useLightningContext } from './index';
+import { createLightningContext } from '../../lib/create-lightning-context';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
-describe('useBindingContext', () => {
+describe('useLightningContext', () => {
   test('to default to the initialValues and render once', () => {
-    const Context = createContext({ valA: 123, valB: 222 });
+    const Context = createLightningContext({ valA: 123, valB: 222 });
 
     let numberOfRenders = 0;
 
-    const UseBindingContextComponent = () => {
-      const { valA } = useBindingContext({ binds: ['valA'] }, Context);
+    const UseLightningContextComponent = () => {
+      const { valA } = useLightningContext({ binds: ['valA'] }, Context);
       numberOfRenders++;
       return valA;
     };
 
     render(
       <Context.Provider>
-        <UseBindingContextComponent />
+        <UseLightningContextComponent />
       </Context.Provider>,
     );
 
@@ -27,12 +27,12 @@ describe('useBindingContext', () => {
   });
 
   test('to update state only once', async () => {
-    const Context = createContext({ valA: 123, valB: 222 });
+    const Context = createLightningContext({ valA: 123, valB: 222 });
 
     let numberOfRenders = 0;
 
-    const UseBindingContextComponent = () => {
-      const { valA } = useBindingContext({ binds: ['valA'] }, Context);
+    const UseLightningContextComponent = () => {
+      const { valA } = useLightningContext({ binds: ['valA'] }, Context);
       numberOfRenders++;
       return <label data-testid="test">{valA}</label>;
     };
@@ -46,7 +46,7 @@ describe('useBindingContext', () => {
                 <button onClick={() => setContextValue(() => ({ valA: 333, valB: 222, dummy: numberOfRenders + 1 }))} />
               )}
             </Context.Mutator>
-            <UseBindingContextComponent />
+            <UseLightningContextComponent />
           </Context.Provider>
         </>
       );
@@ -66,12 +66,12 @@ describe('useBindingContext', () => {
   });
 
   test('to update state only once on multiple binds', async () => {
-    const Context = createContext({ valA: 123, valB: 222 });
+    const Context = createLightningContext({ valA: 123, valB: 222 });
 
     let numberOfRenders = 0;
 
-    const UseBindingContextComponent = () => {
-      const { valA, valB } = useBindingContext({ binds: ['valA', 'valB'] }, Context);
+    const UseLightningContextComponent = () => {
+      const { valA, valB } = useLightningContext({ binds: ['valA', 'valB'] }, Context);
       numberOfRenders++;
       return (
         <label data-testid="test">
@@ -89,7 +89,7 @@ describe('useBindingContext', () => {
                 <button onClick={() => setContextValue(() => ({ valA: 333, valB: 222, dummy: numberOfRenders + 1 }))} />
               )}
             </Context.Mutator>
-            <UseBindingContextComponent />
+            <UseLightningContextComponent />
           </Context.Provider>
         </>
       );
@@ -111,19 +111,19 @@ describe('useBindingContext', () => {
   });
 
   test('to not trigger uneeded updates', async () => {
-    const Context = createContext({ valA: 123, valB: 222 });
+    const Context = createLightningContext({ valA: 123, valB: 222 });
 
     let numberOfRendersA = 0;
     let numberOfRendersB = 0;
 
-    const UseBindingContextComponentA = () => {
-      const { valA } = useBindingContext({ binds: ['valA'] }, Context);
+    const UseLightningContextComponentA = () => {
+      const { valA } = useLightningContext({ binds: ['valA'] }, Context);
       numberOfRendersA++;
       return <label data-testid="testA">{valA}</label>;
     };
 
-    const UseBindingContextComponentB = () => {
-      const { valB } = useBindingContext({ binds: ['valB'] }, Context);
+    const UseLightningContextComponentB = () => {
+      const { valB } = useLightningContext({ binds: ['valB'] }, Context);
       numberOfRendersB++;
       return <label data-testid="testB">{valB}</label>;
     };
@@ -139,8 +139,8 @@ describe('useBindingContext', () => {
                 />
               )}
             </Context.Mutator>
-            <UseBindingContextComponentA />
-            <UseBindingContextComponentB />
+            <UseLightningContextComponentA />
+            <UseLightningContextComponentB />
           </Context.Provider>
         </>
       );

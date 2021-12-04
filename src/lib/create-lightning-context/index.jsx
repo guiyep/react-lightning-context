@@ -6,8 +6,12 @@ import React, { useCallback, useContext, useLayoutEffect, useEffect, useMemo, us
 
 const useDebouncedCallback = (f) => (val) => f(val);
 
-export const createContext = (defaultValue) => {
-  const InternalContext = React.createContext({ queueId: undefined, addBinding: () => {}, removeBinding: () => {} });
+export const createLightningContext = (defaultValue) => {
+  const InternalContext = React.createContext({
+    queueId: undefined,
+    addLightning: () => {},
+    removeLightning: () => {},
+  });
 
   return {
     Provider: ({ children }) => {
@@ -23,12 +27,12 @@ export const createContext = (defaultValue) => {
 
       const queueId = queueIdRef.current;
 
-      const addBinding = useCallback((path) => {
+      const addLightning = useCallback((path) => {
         const currentValue = bindingsRef.current[path];
         bindingsRef.current[path] = currentValue ? currentValue + 1 : 1;
       }, []);
 
-      const removeBinding = useCallback((path) => {
+      const removeLightning = useCallback((path) => {
         const currentValue = bindingsRef.current[path];
         bindingsRef.current[path] = currentValue > 0 ? currentValue - 1 : 0;
 
@@ -44,8 +48,8 @@ export const createContext = (defaultValue) => {
 
       const contextRef = useRef({
         queueId,
-        addBinding,
-        removeBinding,
+        addLightning,
+        removeLightning,
         setContextValue,
       });
 
@@ -55,13 +59,13 @@ export const createContext = (defaultValue) => {
 
         // publish changes to all the listeners, maybe performance here?
         for (const currentBind in bindings) {
-          const nextBindingValue = get(nextValue, currentBind);
-          const oldBindingValue = get(oldValue, currentBind);
+          const nextLightningValue = get(nextValue, currentBind);
+          const oldLightningValue = get(oldValue, currentBind);
 
-          if (oldBindingValue !== nextBindingValue) {
+          if (oldLightningValue !== nextLightningValue) {
             const event = {
               newValue: nextValue,
-              change: { bind: currentBind, value: nextBindingValue },
+              change: { bind: currentBind, value: nextLightningValue },
             };
 
             publish({ queueId, key: currentBind, event });

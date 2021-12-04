@@ -3,7 +3,7 @@ import { addListener, removeListener } from '../../lib/pubsub';
 import get from 'lodash.get';
 
 export const useInternalContext = ({ binds, defaultValue }, InternalContext) => {
-  const { queueId, addBinding, removeBinding } = useContext(InternalContext);
+  const { queueId, addLightning, removeLightning } = useContext(InternalContext);
   const [value, setValue] = useState(undefined);
 
   useLayoutEffect(() => {
@@ -12,13 +12,13 @@ export const useInternalContext = ({ binds, defaultValue }, InternalContext) => 
     };
 
     binds.forEach((currentBind) => {
-      addBinding(currentBind);
+      addLightning(currentBind);
       addListener({ queueId, key: currentBind, listener: onListenerCall });
     });
 
     return () => {
       binds.forEach((currentBind) => {
-        removeBinding(currentBind);
+        removeLightning(currentBind);
         removeListener({ queueId, key: currentBind, listener: onListenerCall });
       });
     };
