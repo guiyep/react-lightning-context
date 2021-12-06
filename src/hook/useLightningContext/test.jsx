@@ -11,7 +11,7 @@ describe('useLightningContext', () => {
     let numberOfRenders = 0;
 
     const UseLightningContextComponent = () => {
-      const { valA } = useLightningContext({ binds: ['valA'] }, Context);
+      const { valA } = useLightningContext({ listenTo: ['valA'] }, Context);
       numberOfRenders++;
       return valA;
     };
@@ -32,7 +32,7 @@ describe('useLightningContext', () => {
     let numberOfRenders = 0;
 
     const UseLightningContextComponent = () => {
-      const { valA } = useLightningContext({ binds: ['valA'] }, Context);
+      const { valA } = useLightningContext({ listenTo: ['valA'] }, Context);
       numberOfRenders++;
       return <label data-testid="test">{valA}</label>;
     };
@@ -65,13 +65,13 @@ describe('useLightningContext', () => {
     expect(numberOfRenders).toEqual(2);
   });
 
-  test('to update state only once on multiple binds', async () => {
+  test('to update state only once on multiple listenTo', async () => {
     const Context = createLightningContext({ valA: 123, valB: 222 });
 
     let numberOfRenders = 0;
 
     const UseLightningContextComponent = () => {
-      const { valA, valB } = useLightningContext({ binds: ['valA', 'valB'] }, Context);
+      const { valA, valB } = useLightningContext({ listenTo: ['valA', 'valB'] }, Context);
       numberOfRenders++;
       return (
         <label data-testid="test">
@@ -117,13 +117,13 @@ describe('useLightningContext', () => {
     let numberOfRendersB = 0;
 
     const UseLightningContextComponentA = () => {
-      const { valA } = useLightningContext({ binds: ['valA'] }, Context);
+      const { valA } = useLightningContext({ listenTo: ['valA'] }, Context);
       numberOfRendersA++;
       return <label data-testid="testA">{valA}</label>;
     };
 
     const UseLightningContextComponentB = () => {
-      const { valB } = useLightningContext({ binds: ['valB'] }, Context);
+      const { valB } = useLightningContext({ listenTo: ['valB'] }, Context);
       numberOfRendersB++;
       return <label data-testid="testB">{valB}</label>;
     };

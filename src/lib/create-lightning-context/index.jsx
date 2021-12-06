@@ -84,8 +84,8 @@ export const createLightningContext = (defaultValue, { waitBeforeUpdate } = { wa
       const { setContextValue } = useContext(InternalContext);
       return children({ setContextValue });
     },
-    Consumer: ({ binds, children }) => {
-      const resultValue = useInternalContext({ binds, defaultValue }, InternalContext);
+    Consumer: ({ listenTo, children }) => {
+      const resultValue = useInternalContext({ listenTo, defaultValue }, InternalContext);
       return children(resultValue);
     },
     [INTERNAL]: {

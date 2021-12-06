@@ -30,7 +30,7 @@ describe('createLightningContext', () => {
 
     render(
       <Context.Provider>
-        <Context.Consumer binds={['valA']}>
+        <Context.Consumer listenTo={['valA']}>
           {({ valA }) => {
             numberOfRenders++;
             return valA;
@@ -57,7 +57,7 @@ describe('createLightningContext', () => {
                 <button onClick={() => setContextValue(() => ({ valA: 333, valB: 222, dummy: numberOfRenders + 1 }))} />
               )}
             </Context.Mutator>
-            <Context.Consumer binds={['valA']}>
+            <Context.Consumer listenTo={['valA']}>
               {({ valA }) => {
                 numberOfRenders++;
                 return <label data-testid="test">{valA}</label>;
@@ -82,7 +82,7 @@ describe('createLightningContext', () => {
     expect(numberOfRenders).toEqual(2);
   });
 
-  test('to update state only once on multiple binds', async () => {
+  test('to update state only once on multiple listenTo', async () => {
     const Context = createLightningContext({ valA: 123, valB: 222 });
 
     let numberOfRenders = 0;
@@ -96,7 +96,7 @@ describe('createLightningContext', () => {
                 <button onClick={() => setContextValue(() => ({ valA: 333, valB: 222, dummy: numberOfRenders + 1 }))} />
               )}
             </Context.Mutator>
-            <Context.Consumer binds={['valA', 'valB']}>
+            <Context.Consumer listenTo={['valA', 'valB']}>
               {({ valA, valB }) => {
                 numberOfRenders++;
                 return (
@@ -141,13 +141,13 @@ describe('createLightningContext', () => {
                 <button onClick={() => setContextValue(() => ({ valA: 333, valB: 222, dummy: numberOfRendersA + 1 }))} />
               )}
             </Context.Mutator>
-            <Context.Consumer binds={['valA']}>
+            <Context.Consumer listenTo={['valA']}>
               {({ valA }) => {
                 numberOfRendersA++;
                 return <label data-testid="testA">{valA}</label>;
               }}
             </Context.Consumer>
-            <Context.Consumer binds={['valB']}>
+            <Context.Consumer listenTo={['valB']}>
               {({ valB }) => {
                 numberOfRendersB++;
                 return <label data-testid="testB">{valB}</label>;

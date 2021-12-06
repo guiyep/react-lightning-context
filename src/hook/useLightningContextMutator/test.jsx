@@ -13,13 +13,13 @@ describe('useLightningContextMutator', () => {
     let numberOfRendersB = 0;
 
     const UseLightningContextComponentA = () => {
-      const { valA } = useLightningContext({ binds: ['valA'] }, Context);
+      const { valA } = useLightningContext({ listenTo: ['valA'] }, Context);
       numberOfRendersA++;
       return <label data-testid="testA">{valA}</label>;
     };
 
     const UseLightningContextComponentB = () => {
-      const { valB } = useLightningContext({ binds: ['valB'] }, Context);
+      const { valB } = useLightningContext({ listenTo: ['valB'] }, Context);
       numberOfRendersB++;
       return <label data-testid="testB">{valB}</label>;
     };
