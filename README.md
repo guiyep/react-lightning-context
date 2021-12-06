@@ -50,6 +50,11 @@ The main idea ia following the same patterns and api that `React Context` provid
     return <label>{valueC}</label>;
   };
 
+  // listenTo can be:
+  // - valueA -> { a: { b: 222, r: 333 } }
+  // - valueA.a -> { b: 222, r: 333 }
+  // - valueA.a.b -> 222
+
   const ExampleA = () => ()
     <Context.Provider>
       <UseLightningContextHookComponent />
@@ -114,9 +119,9 @@ const TopLevelExperience = () => {
 
 This need to be nested inside a `Provider` component. Same as `React.Context` it uses the function render pattern and it execution a function when it need to be render.
 
-| Properties | Type          | Required | Description                                                                      |
-| ---------- | ------------- | -------- | -------------------------------------------------------------------------------- |
-| `listenTo` | Array<String> | **Yes**  | Properties from the `Context.value` that you want to listen to. It can be nested |
+| Properties | Type            | Required | Description                                                                      |
+| ---------- | --------------- | -------- | -------------------------------------------------------------------------------- |
+| `listenTo` | Array< String > | **Yes**  | Properties from the `Context.value` that you want to listen to. It can be nested |
 
 It **returns** a function that is executed passing a mapped object with the binding
 
