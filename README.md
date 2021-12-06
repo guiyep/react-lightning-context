@@ -22,6 +22,11 @@ The main idea is following the same patterns and api that `React Context` provid
   const defaultValue = { valueA: { a: { b: 222, r: 333 } }, valueB: 222, valueC: 444 };
   const Context = createLightningContext(defaultValue);
 
+  // `listenTo` can be (some examples):
+  // - valueA -> { a: { b: 222, r: 333 } }
+  // - valueA.a -> { b: 222, r: 333 }
+  // - valueA.a.b -> 222
+
   const ExampleA = () => ()
     <Context.Provider>
       <Context.Consumer listenTo={['valueC']}>
@@ -50,7 +55,7 @@ The main idea ia following the same patterns and api that `React Context` provid
     return <label>{valueC}</label>;
   };
 
-  // listenTo can be:
+  // `listenTo` can be (some examples):
   // - valueA -> { a: { b: 222, r: 333 } }
   // - valueA.a -> { b: 222, r: 333 }
   // - valueA.a.b -> 222
