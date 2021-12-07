@@ -1,5 +1,9 @@
 # react-lightning-context
 
+<p align="center">
+  <img src="./assets/logo.png?raw=true">
+</p>
+
 A super performant lightning fast context library that only re-renders what has changed and nothing else. This library is a drop in replacement of the official `React Context` and it is only **12kb**!!!!
 
 [![NPM](https://img.shields.io/npm/v/react-lightning-context.svg)](https://www.npmjs.com/package/react-lightning-context) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
@@ -14,9 +18,9 @@ This is **NOT** a state management library. Just a performant `React Context` re
 
 The bordered area is where the element is re-rendered. In the examples, the button is updating only one of the properties in the internal Context value.
 
-| Using `react-lightning-context`                                     | Using `React Context`                                                  |
-| ------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| ![with gif](https://imagizer.imageshack.com/img924/1443/HuV7T8.gif) | ![without gif](https://imagizer.imageshack.com/img922/9182/bbszLm.gif) |
+| Using `react-lightning-context`            | Using `React Context`                   |
+| ------------------------------------------ | --------------------------------------- |
+| ![with gif](./assets/with-op.gif?raw=true) | ![without gif](./assets/without-op.gif) |
 
 ## How to install
 
