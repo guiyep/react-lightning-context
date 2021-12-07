@@ -1,5 +1,5 @@
 {
-  "name": "react-binding-context",
+  "name": "react-lightning-context",
   "version": "1.0.0",
   "description": "a performant react context",
   "author": "guiyep",
@@ -71,7 +71,6 @@
     "rollup-plugin-cleaner": "1.0.0",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-gzip": "3.0.0",
-    "rollup-plugin-import-alias": "1.0.10",
     "rollup-plugin-json": "4.0.0",
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-peer-deps-external": "2.2.4",

@@ -7,7 +7,6 @@ import gzipPlugin from 'rollup-plugin-gzip';
 import cleaner from 'rollup-plugin-cleaner';
 import json from 'rollup-plugin-json';
 import { terser } from 'rollup-plugin-terser';
-import importAlias from 'rollup-plugin-import-alias';
 
 import pkg from './package.json';
 
