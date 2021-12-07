@@ -22,6 +22,8 @@ The bordered area is where the element is re-rendered. In the examples, the butt
 | ------------------------------------------ | --------------------------------------- |
 | ![with gif](./assets/with-op.gif?raw=true) | ![without gif](./assets/without-op.gif) |
 
+As you can see `react-lightning-context` only re-renders what has only changed vs `React Context` that re-renders everything within the `Provider`
+
 ## How to install
 
 ```terminal
