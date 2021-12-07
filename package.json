@@ -1,10 +1,10 @@
 {
   "name": "react-lightning-context",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "a performant react context",
   "author": "guiyep",
   "license": "MIT",
-  "repository": "guiyep/react-select-virtualized",
+  "repository": "guiyep/react-lightning-context",
   "main": "dist/index.min.js",
   "engines": {
     "node": ">=9",

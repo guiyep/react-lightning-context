@@ -14,9 +14,9 @@ This is **NOT** a state management library. Just a performant `React Context` re
 
 The bordered area is where the element is re-rendered. In the examples, the button is updating only one of the properties in the internal Context value.
 
-| Using `react-lightning-context`  | Using `React Context`                  |
-| -------------------------------- | -------------------------------------- |
-| ![with gif](/assets/with-op.gif) | ![without gif](/assets/without-op.gif) |
+| Using `react-lightning-context`                                     | Using `React Context`                                                  |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| ![with gif](https://imagizer.imageshack.com/img924/1443/HuV7T8.gif) | ![without gif](https://imagizer.imageshack.com/img922/9182/bbszLm.gif) |
 
 ## How to install
 
