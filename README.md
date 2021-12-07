@@ -29,6 +29,7 @@ The bordered area is where the element is re-rendered. In the examples, the butt
 The main idea is following the same patterns and api that `React Context` provides with a little twist.
 
 ```jsx
+  import { createLightningContext } from 'react-lightning-context';
   const defaultValue = { valueA: { a: { b: 222, r: 333 } }, valueB: 222, valueC: 444 };
   const Context = createLightningContext(defaultValue);
 
@@ -57,6 +58,7 @@ The main idea is following the same patterns and api that `React Context` provid
 The main idea ia following the same patterns and api that `React Context` provides with a little twist. This is doing the same as the previous example but with hooks.
 
 ```jsx
+  import { createLightningContext, useLightningContext } from 'react-lightning-context';
   const defaultValue = { valueA: { a: { b: 222, r: 333 } }, valueB: 222, valueC: 444 };
   const Context = createLightningContext(defaultValue);
 
@@ -123,6 +125,7 @@ This does not have any props. Same as `React.Context` it wraps the context exper
 #### Example
 
 ```jsx
+import { createLightningContext } from 'react-lightning-context';
 const Context = createLightningContext({ value: 'test' });
 
 const TopLevelExperience = () => {
@@ -143,6 +146,7 @@ It **returns** a function that is executed passing a mapped object with the bind
 #### Example
 
 ```jsx
+import { createLightningContext } from 'react-lightning-context';
 const Context = createLightningContext({ value: { first: 1, second: 2 } });
 
 const TopLevelExperience = () => {
@@ -174,6 +178,7 @@ Same as `Consumer` but as a Hook api (similar to the `useContext` hook)
 | `Context`  | `createLightningContext` returned object | **Yes**  | The context you are using                                                        |
 
 ```js
+import { useLightningContext } from 'react-lightning-context';
 const result = useLightningContext({ listenTo: [...] }, Context);
 ```
 
@@ -199,6 +204,7 @@ setContextValue((value) => {
 #### Example
 
 ```jsx
+import { createLightningContext } from 'react-lightning-context';
 const Context = createLightningContext({ value: { first: 1, second: 2 } });
 
 const TopLevelExperience = () => {
@@ -223,5 +229,6 @@ Same as `Context.Mutator` but as a Hook.
 #### Example
 
 ```jsx
+import { useLightningContextMutator } from 'react-lightning-context';
 const setContextValue = useLightningContextMutator(Context);
 ```
