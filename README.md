@@ -10,7 +10,7 @@ This is **NOT** a state management library. Just a performant `React Context` re
 
 ## Libraries comparison
 
-The bordered area is where the element is re-rendered. In the examples, the button is updating only one of the properties in the internal C0ntext value.
+The bordered area is where the element is re-rendered. In the examples, the button is updating only one of the properties in the internal Context value.
 
 | Using `react-lightning-context`  | Using `React Context`                  |
 | -------------------------------- | -------------------------------------- |
