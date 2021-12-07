@@ -8,6 +8,14 @@ When building web apps at scale one of the main problems is performance over tim
 
 This is **NOT** a state management library. Just a performant `React Context` replacement. You can also mix this up with redux for example and get a full redux experience but this is outside the scope of this library.
 
+## Libraries Comparison
+
+The bordered area is where the element is re-rendered. In the examples, the button is updating only one of the properties in the internal Ccntext value.
+
+| Using `react-lightning-context`  | Using `React Context`                  |
+| -------------------------------- | -------------------------------------- |
+| ![with gif](/assets/with-op.gif) | ![without gif](/assets/without-op.gif) |
+
 ## How to install
 
 ```terminal
@@ -27,7 +35,7 @@ The main idea is following the same patterns and api that `React Context` provid
   // - valueA.a -> { b: 222, r: 333 }
   // - valueA.a.b -> 222
 
-  const ExampleA = () => ()
+  const ExampleA = () => (
     <Context.Provider>
       <Context.Consumer listenTo={['valueC']}>
         {({ valueC }) => <label>{valueC}</label> }
@@ -60,7 +68,7 @@ The main idea ia following the same patterns and api that `React Context` provid
   // - valueA.a -> { b: 222, r: 333 }
   // - valueA.a.b -> 222
 
-  const ExampleA = () => ()
+  const ExampleA = () => (
     <Context.Provider>
       <UseLightningContextHookComponent />
     </Context.Provider>);
