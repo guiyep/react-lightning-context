@@ -8,9 +8,9 @@ When building web apps at scale one of the main problems is performance over tim
 
 This is **NOT** a state management library. Just a performant `React Context` replacement. You can also mix this up with redux for example and get a full redux experience but this is outside the scope of this library.
 
-## Libraries Comparison
+## Libraries comparison
 
-The bordered area is where the element is re-rendered. In the examples, the button is updating only one of the properties in the internal Ccntext value.
+The bordered area is where the element is re-rendered. In the examples, the button is updating only one of the properties in the internal C0ntext value.
 
 | Using `react-lightning-context`  | Using `React Context`                  |
 | -------------------------------- | -------------------------------------- |
