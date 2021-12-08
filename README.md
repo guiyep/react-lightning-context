@@ -91,6 +91,10 @@ The main idea ia following the same patterns and api that `React Context` provid
 - `Context.Provider` is defining the area in which the context data is going to be shared.
 - `useLightningContext` will listen to changes in the Context value and will be updated **ONLY** when the values on the `listenTo` prop in the context has changed. You can listen to more than one field, or you can go deep down into the props. ex: `valueA.a.r`.
 
+## Try it
+
+[![Edit react-lightning-context](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/beautiful-currying-i7xin)
+
 ## API Documentation
 
 | Name                                                          | Supported ? | Description                                                                                  |
