@@ -10,7 +10,7 @@ const useDebouncedDisabledCallback = (f) => (val) => f(val);
 export const createLightningContext = (defaultValue, { waitBeforeUpdate } = { waitBeforeUpdate: false }) => {
   const InternalContext = React.createContext({
     queueId: undefined,
-    addLightning: () => {},
+    addBinding: () => {},
     removeLightning: () => {},
   });
 
@@ -30,7 +30,7 @@ export const createLightningContext = (defaultValue, { waitBeforeUpdate } = { wa
 
       const queueId = queueIdRef.current;
 
-      const addLightning = useCallback((path) => {
+      const addBinding = useCallback((path) => {
         const currentValue = bindingsRef.current[path];
         bindingsRef.current[path] = currentValue ? currentValue + 1 : 1;
       }, []);
@@ -51,7 +51,7 @@ export const createLightningContext = (defaultValue, { waitBeforeUpdate } = { wa
 
       const contextRef = useRef({
         queueId,
-        addLightning,
+        addBinding,
         removeLightning,
         setContextValue,
       });
