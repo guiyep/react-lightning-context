@@ -3,10 +3,12 @@
 <p align="center">
   <img src="./assets/logo.png?raw=true">
 </p>
+<p align="center">
+  <img src="https://img.shields.io/npm/v/react-lightning-context.svg">
+  <img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg">
+</p>
 
 A super performant lightning fast context library that only re-renders what has changed and nothing else. This library is a drop in replacement of the official `React Context` and it is only **12kb**!!!!
-
-[![NPM](https://img.shields.io/npm/v/react-lightning-context.svg)](https://www.npmjs.com/package/react-lightning-context) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Why ?
 
