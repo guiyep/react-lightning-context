@@ -8205,6 +8205,11 @@ lodash.merge@^4.6.2:
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
 
+lodash.set@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
+  integrity sha1-2HV7HagH3eJIFrDWqEvqGnYjCyM=
+
 lodash.uniq@4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
@@ -10279,11 +10284,6 @@ rollup-plugin-gzip@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/rollup-plugin-gzip/-/rollup-plugin-gzip-3.0.0.tgz#2a3c7c9a79c9448082c7a567ef819a9877a0f1f7"
   integrity sha512-xvyKihEdKygVk0vJt0tKytVw/WgLEMghX1uWhNc7ANuTpXw46fhvdTTDGC1OHxFBSEwUQ1I34b7S3iD8l+L30g==
-
-rollup-plugin-import-alias@1.0.10:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-import-alias/-/rollup-plugin-import-alias-1.0.10.tgz#5b85ee7cb6b88676354de955d6eb714dfa5d00b4"
-  integrity sha512-iHJNJWHy7QFlf57pUJD6XeN+8KDFjboPK1Yj4lVpl3Bb5KDspWwPjp9YCoJNchQu81EkjCWtJDffbIvRYrBAgg==
 
 rollup-plugin-json@4.0.0:
   version "4.0.0"

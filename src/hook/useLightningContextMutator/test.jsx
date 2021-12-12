@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLightningContextMutator } from './index';
+import { useLightningContextMutator, useLightningContextPropMutator } from './index';
 import { useLightningContext } from '../useLightningContext';
 import { createLightningContext } from '../../lib/create-lightning-context';
 import '@testing-library/jest-dom';
@@ -93,5 +93,104 @@ describe('useLightningContextMutator', () => {
     expect(valueRef).toEqual({ valA: 123, valB: 222 });
     fireEvent.click(button);
     expect(valueRef).toEqual({ valA: 333, valB: 222 });
+  });
+});
+
+describe('useLightningContextPropMutator', () => {
+  test('to not trigger uneeded updates', async () => {
+    const Context = createLightningContext({ valA: 123, valB: 222 });
+
+    let numberOfRendersA = 0;
+    let numberOfRendersB = 0;
+
+    const UseLightningContextComponentA = () => {
+      const { valA } = useLightningContext({ listenTo: ['valA'] }, Context);
+      numberOfRendersA++;
+      return <label data-testid="testA">{valA}</label>;
+    };
+
+    const UseLightningContextComponentB = () => {
+      const { valB } = useLightningContext({ listenTo: ['valB'] }, Context);
+      numberOfRendersB++;
+      return <label data-testid="testB">{valB}</label>;
+    };
+
+    const UseLightningContextMutatorComponent = () => {
+      const setContextPropValue = useLightningContextPropMutator({ prop: 'valA' }, Context);
+      return (
+        <button
+          onClick={() =>
+            setContextPropValue(() => {
+              return 333;
+            })
+          }
+        />
+      );
+    };
+
+    const TestUpdateContext = () => {
+      return (
+        <>
+          <Context.Provider>
+            <UseLightningContextMutatorComponent />
+            <UseLightningContextComponentA />
+            <UseLightningContextComponentB />
+          </Context.Provider>
+        </>
+      );
+    };
+
+    render(<TestUpdateContext />);
+
+    const button = screen.getByRole('button');
+    fireEvent.click(button);
+    fireEvent.click(button);
+    fireEvent.click(button);
+
+    await waitFor(() => screen.getByTestId('testA'));
+
+    expect(screen.getByTestId('testA')).toHaveTextContent('333');
+
+    // Why 2 ?... 1 initial render + 1 update
+    expect(numberOfRendersA).toEqual(2);
+    expect(numberOfRendersB).toEqual(1);
+  });
+
+  test('mutator to pass value', async () => {
+    const Context = createLightningContext({ valA: 123, valB: 222 });
+
+    let valueRef;
+
+    const UseLightningContextMutatorComponent = () => {
+      const setContextPropValue = useLightningContextPropMutator({ prop: 'valA' }, Context);
+      return (
+        <button
+          onClick={() =>
+            setContextPropValue((value) => {
+              valueRef = value;
+              return 333;
+            })
+          }
+        />
+      );
+    };
+
+    const TestUpdateContext = () => {
+      return (
+        <>
+          <Context.Provider>
+            <UseLightningContextMutatorComponent />
+          </Context.Provider>
+        </>
+      );
+    };
+
+    render(<TestUpdateContext />);
+
+    const button = screen.getByRole('button');
+    fireEvent.click(button);
+    expect(valueRef).toEqual(123);
+    fireEvent.click(button);
+    expect(valueRef).toEqual(333);
   });
 });

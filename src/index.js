@@ -1,3 +1,3 @@
 export { createLightningContext } from './lib/create-lightning-context';
 export { useLightningContext } from './hook/useLightningContext';
-export { useLightningContextMutator } from './hook/useLightningContextMutator';
+export { useLightningContextMutator, useLightningContextPropMutator } from './hook/useLightningContextMutator';

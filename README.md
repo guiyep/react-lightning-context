@@ -93,6 +93,13 @@ The main idea ia following the same patterns and api that `React Context` provid
 - `Context.Provider` is defining the area in which the context data is going to be shared.
 - `useLightningContext` will listen to changes in the Context value and will be updated **ONLY** when the values on the `listenTo` prop in the context has changed. You can listen to more than one field, or you can go deep down into the props. ex: `valueA.a.r`.
 
+## What does this package exports?
+
+- `createLightningContext`
+- `useLightningContext`
+- `useLightningContextMutator`
+- `useLightningContextPropMutator`
+
 ## Try it
 
 [![Edit react-lightning-context](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/beautiful-currying-i7xin)
@@ -109,6 +116,7 @@ The main idea ia following the same patterns and api that `React Context` provid
 | `useContext` **renamed to** `useLightningContext`             | **Yes**     | A way of consuming a context value using hook. Similar to useContext                         |
 | `Context.Mutator`                                             | **New**     | A component that provides a way of mutating the value of the context                         |
 | `useLightningContextMutator`                                  | **New**     | A Hook that provides a way of mutating the value of the context                              |
+| `useLightningContextPropMutator`                              | **New**     | A Hook that provides a way of mutating only **one prop** of the context                      |
 
 ### createLightningContext
 
@@ -184,10 +192,10 @@ if **listenTo** is `['value.first', 'value.seconds']` the render function that w
 
 Same as `Consumer` but as a Hook api (similar to the `useContext` hook)
 
-| Properties | Type                                     | Required | Description                                                                      |
-| ---------- | ---------------------------------------- | -------- | -------------------------------------------------------------------------------- |
-| `listenTo` | Array<String>                            | **Yes**  | Properties from the `Context.value` that you want to listen to. It can be nested |
-| `Context`  | `createLightningContext` returned object | **Yes**  | The context you are using                                                        |
+| Properties        | Type                                     | Required | Description                                                                      |
+| ----------------- | ---------------------------------------- | -------- | -------------------------------------------------------------------------------- |
+| `Object.listenTo` | Array<String>                            | **Yes**  | Properties from the `Context.value` that you want to listen to. It can be nested |
+| `Context`         | `createLightningContext` returned object | **Yes**  | The context you are using                                                        |
 
 ```js
 import { useLightningContext } from 'react-lightning-context';
@@ -238,9 +246,29 @@ Same as `Context.Mutator` but as a Hook.
 | ---------- | ---------------------------------------- | -------- | ------------------------- |
 | `Context`  | `createLightningContext` returned object | **Yes**  | The context you are using |
 
+### useLightningContextPropMutator
+
+This is same as the `useLightningContextMutator` but only mutate one property of the `Context value`. As a result no need to merge anything.
+
+| Properties    | Type                                     | Required | Description                                             |
+| ------------- | ---------------------------------------- | -------- | ------------------------------------------------------- |
+| `Object.prop` | String                                   | **Yes**  | The prop you are mutating, can be a nested property too |
+| `Context`     | `createLightningContext` returned object | **Yes**  | The context you are using                               |
+
 #### Example
 
 ```jsx
-import { useLightningContextMutator } from 'react-lightning-context';
-const setContextValue = useLightningContextMutator(Context);
+import { useLightningContextPropMutator } from 'react-lightning-context';
+const setContextPropValue = useLightningContextPropMutator({ props: 'object.valueA.valueB' }, Context);
+```
+
+#### Example calling setContextPropValue
+
+The **value** parameter is the updated context value
+
+```js
+setContextPropValue((propValue) => {
+  // do anything you want
+  return AnyNewPropValue;
+});
 ```
