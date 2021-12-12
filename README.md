@@ -210,7 +210,7 @@ It **returns** a function that is executed passing a callback function called `s
 
 #### Example calling setContextValue
 
-The **value** parameter is the updated context value
+The **value** parameter is the current context value
 
 ```js
 setContextValue((value) => {
@@ -264,7 +264,7 @@ const setContextPropValue = useLightningContextPropMutator({ prop: 'object.value
 
 #### Example calling setContextPropValue
 
-The **value** parameter is the updated context value
+The **propValue** parameter is the current context prop value
 
 ```js
 setContextPropValue((propValue) => {
