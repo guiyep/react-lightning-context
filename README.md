@@ -259,7 +259,7 @@ This is same as the `useLightningContextMutator` but only mutate one property of
 
 ```jsx
 import { useLightningContextPropMutator } from 'react-lightning-context';
-const setContextPropValue = useLightningContextPropMutator({ props: 'object.valueA.valueB' }, Context);
+const setContextPropValue = useLightningContextPropMutator({ prop: 'object.valueA.valueB' }, Context);
 ```
 
 #### Example calling setContextPropValue
