@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg">
 </p>
 
-A super performant lightning fast context library that only re-renders what has changed and nothing else. This library is a drop in replacement of the official `React Context` and it is only **12kb**!!!!
+A super performant lightning fast context library that only re-renders what has changed and nothing else. This library is a drop in replacement of the official `React Context` and it is only **17kb**!!!!
 
 ## Why ?
 
