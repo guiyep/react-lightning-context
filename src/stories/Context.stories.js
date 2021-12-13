@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Button from '@atlaskit/button';
-import get from 'lodash.get';
+import { get } from '../lib/get';
 import { createLightningContext } from '../lib/create-lightning-context';
 import { useLightningContext } from '../hook/useLightningContext';
 

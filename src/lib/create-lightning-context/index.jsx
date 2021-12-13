@@ -1,4 +1,4 @@
-import get from 'lodash.get';
+import { get } from '../get';
 import { initialize, publish } from '../pubsub';
 import { INTERNAL } from '../constants';
 import { useInternalContext } from '../../hook/useInternalContext';

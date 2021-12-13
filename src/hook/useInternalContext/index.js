@@ -1,6 +1,6 @@
 import React, { useContext, useLayoutEffect, useState, useRef } from 'react';
 import { addListener, removeListener } from '../../lib/pubsub';
-import get from 'lodash.get';
+import { get } from '../../lib/get';
 
 export const useInternalContext = ({ listenTo, defaultValue }, InternalContext) => {
   const { queueId, addBinding, removeLightning } = useContext(InternalContext);

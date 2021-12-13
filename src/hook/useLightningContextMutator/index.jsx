@@ -1,6 +1,6 @@
 import React, { useContext, useCallback } from 'react';
 import set from 'lodash.set';
-import get from 'lodash.get';
+import { get } from '../../lib/get';
 import { INTERNAL } from '../../lib/constants';
 
 export const useLightningContextMutator = (Context) => {
