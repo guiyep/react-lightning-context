@@ -74,9 +74,7 @@ describe('createLightningContext', () => {
     fireEvent.click(button);
 
     await waitFor(() => screen.getByTestId('test'));
-    await 
-
-    expect(screen.getByTestId('test')).toHaveTextContent('333');
+    await expect(screen.getByTestId('test')).toHaveTextContent('333');
 
     // Why 2 ?... 1 initial render + 1 update
     expect(numberOfRenders).toEqual(2);
@@ -138,7 +136,9 @@ describe('createLightningContext', () => {
           <Context.Provider>
             <Context.Mutator>
               {({ setContextValue }) => (
-                <button onClick={() => setContextValue(() => ({ valA: 333, valB: 222, dummy: numberOfRendersA + 1 }))} />
+                <button
+                  onClick={() => setContextValue(() => ({ valA: 333, valB: 222, dummy: numberOfRendersA + 1 }))}
+                />
               )}
             </Context.Mutator>
             <Context.Consumer listenTo={['valA']}>

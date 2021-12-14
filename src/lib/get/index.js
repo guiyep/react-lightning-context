@@ -5,6 +5,6 @@ export const get = (object, path) => {
 
   const arr = path.split('.');
   return arr.reduce((acc, currentProp) => {
-    return acc && acc[currentProp] || undefined;
+    return (acc && acc[currentProp]) || undefined;
   }, object);
 };
