@@ -3,7 +3,7 @@ import { initialize, publish } from '../pubsub';
 import { INTERNAL } from '../constants';
 import { useInternalContext } from '../../hook/useInternalContext';
 import { useDebouncedCallback as useDebouncedCallbackHook } from '../../hook/useDebouncedCallback';
-import React, { useCallback, useContext, useLayoutEffect, useEffect, useMemo, useState, useRef } from 'react';
+import React, { useCallback, useContext, useLayoutEffect, useMemo, useState, useRef } from 'react';
 
 const useDebouncedDisabledCallback = (f) => (val) => f(val);
 
