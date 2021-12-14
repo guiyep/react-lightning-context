@@ -1,5 +1,5 @@
 import React, { useContext, useCallback } from 'react';
-import set from 'lodash.set';
+import { set } from '../../lib/set';
 import { get } from '../../lib/get';
 import { INTERNAL } from '../../lib/constants';
 
