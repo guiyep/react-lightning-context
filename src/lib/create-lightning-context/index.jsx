@@ -46,8 +46,7 @@ export const createLightningContext = (defaultValue, { waitBeforeUpdate } = { wa
 
       const setContextValue = useCallback(
         (f) => {
-          const val = f(valueRef.current);
-          onPublishEvents(val);
+          onPublishEvents(222);
         },
         [onPublishEvents],
       );
