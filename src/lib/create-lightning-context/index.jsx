@@ -1,13 +1,11 @@
+import React, { useCallback, useContext, useMemo, useRef } from 'react';
 import { get } from '../get';
 import { initialize, publish } from '../pubsub';
 import { INTERNAL } from '../constants';
 import { useInternalContext } from '../../hook/useInternalContext';
 import { useDebouncedCallback as useDebouncedCallbackHook } from '../../hook/useDebouncedCallback';
-import React, { useCallback, useContext, useLayoutEffect, useMemo, useState, useRef } from 'react';
 
 const useDebouncedDisabledCallback = (f) => (val) => f(val);
-
-a;
 
 export const createLightningContext = (defaultValue, { waitBeforeUpdate } = { waitBeforeUpdate: false }) => {
   const InternalContext = React.createContext({
@@ -46,10 +44,13 @@ export const createLightningContext = (defaultValue, { waitBeforeUpdate } = { wa
         }
       }, []);
 
-      const setContextValue = useCallback((f) => {
-        const val = f(valueRef.current);
-        onPublishEvents(val);
-      });
+      const setContextValue = useCallback(
+        (f) => {
+          const val = f(valueRef.current);
+          onPublishEvents(val);
+        },
+        [onPublishEvents],
+      );
 
       const contextRef = useRef({
         queueId,
@@ -63,7 +64,8 @@ export const createLightningContext = (defaultValue, { waitBeforeUpdate } = { wa
         const oldValue = valueRef.current;
 
         // publish changes to all the listeners, maybe performance here?
-        for (const currentBind in bindings) {
+
+        Object.keys(bindings).forEach((currentBind) => {
           const nextLightningValue = get(nextValue, currentBind);
           const oldLightningValue = get(oldValue, currentBind);
 
@@ -75,7 +77,7 @@ export const createLightningContext = (defaultValue, { waitBeforeUpdate } = { wa
 
             publish({ queueId, key: currentBind, event });
           }
-        }
+        });
 
         valueRef.current = nextValue;
       }, waitBeforeUpdate);
