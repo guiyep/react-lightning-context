@@ -8,6 +8,7 @@
     <img src="https://img.shields.io/npm/v/react-lightning-context.svg">
   </a>
   <img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg">
+  <img src="https://img.shields.io/bundlephobia/minzip/react-lightning-context">
 </p>
 
 A super performant lightning fast context library that only re-renders what has changed and nothing else. This library is a drop in replacement of the official `React Context` and it is only **8kb**!!!!
