@@ -8,15 +8,15 @@ const defaultValue = { valueA: { a: { b: 222, r: 333 } }, valueB: 222, valueC: 4
 const LightningContext = createLightningContext(defaultValue);
 const ReactContext = React.createContext(defaultValue);
 
-const Page = ({ children }) => <div style={{ fontFamily: 'arial' }}>{children}</div>;
+const Page = function ({ children }) {
+  return <div style={{ fontFamily: 'arial' }}>{children}</div>;
+};
 
-const Container = ({ children }) => (
-  <div style={{ display: 'flex' }}>
-    {'This is within another component:'} {children}
-  </div>
-);
+const Container = function ({ children }) {
+  return <div style={{ display: 'flex' }}>This is within another component: {children}</div>;
+};
 
-const UseLightningContextHookComponent = ({ bind }) => {
+const UseLightningContextHookComponent = function ({ bind }) {
   const result = useLightningContext({ listenTo: [bind] }, LightningContext);
   return (
     <div>
@@ -25,7 +25,7 @@ const UseLightningContextHookComponent = ({ bind }) => {
   );
 };
 
-const UseReactContextHookComponent = ({ bind }) => {
+const UseReactContextHookComponent = function ({ bind }) {
   const result = useContext(ReactContext);
   console.log(result);
   return (
@@ -35,7 +35,7 @@ const UseReactContextHookComponent = ({ bind }) => {
   );
 };
 
-const ExampleA = () => {
+const ExampleA = function () {
   return (
     <Page>
       <LightningContext.Provider>
@@ -63,7 +63,7 @@ const ExampleA = () => {
   );
 };
 
-const ExampleB = () => {
+const ExampleB = function () {
   const [value, setValue] = useState(defaultValue);
   return (
     <Page>
@@ -91,8 +91,10 @@ export default {
   component: ExampleA,
 };
 
-const Template = (args) => <ExampleA />;
+export const UsingLightingContext = function () {
+  return <ExampleA />;
+};
 
-export const UsingLightingContext = () => <ExampleA />;
-
-export const UsingReactContext = () => <ExampleB />;
+export const UsingReactContext = function () {
+  return <ExampleB />;
+};

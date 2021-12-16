@@ -23,5 +23,6 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - run: yarn
+      - run: yarn lint
       - run: yarn test
       - run: yarn build-prod

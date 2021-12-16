@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const set = (obj, path, value) => {
   var schema = obj;
   var pList = path.split('.');

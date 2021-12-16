@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useState, useRef } from 'react';
+import { useContext, useLayoutEffect, useState } from 'react';
 import { addListener, removeListener } from '../../lib/pubsub';
 import { get } from '../../lib/get';
 
@@ -22,7 +22,7 @@ export const useInternalContext = ({ listenTo, defaultValue }, InternalContext) 
         removeListener({ queueId, key: currentBind, listener: onListenerCall });
       });
     };
-  }, [listenTo]);
+  }, [listenTo, addBinding, queueId, removeLightning]);
 
   // on first render, there is no value, we use the default
   if (!value) {

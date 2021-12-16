@@ -50,7 +50,7 @@ export const removeListener = ({ queueId, key, listener }) => {
     return;
   }
 
-  for (let i = 0; i < queues[queueId].listeners[key].length; i++) {
+  for (let i = 0; i < queues[queueId].listeners[key].length; i + 1) {
     if (queues[queueId].listeners[key][i] === listener) {
       queues[queueId].listeners[key].splice(i, 1);
       break;
@@ -73,6 +73,4 @@ const deepFreeze = (obj) => {
   return Object.freeze(obj);
 };
 
-export const getQueue = () => {
-  return deepFreeze(queues);
-};
+export const getQueue = () => deepFreeze(queues);

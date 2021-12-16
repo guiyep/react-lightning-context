@@ -27,6 +27,9 @@
     "build-storybook": "build-storybook",
     "eslint": "eslint --fix",
     "prettier": "prettier --write",
+    "eslint2": "eslint",
+    "prettier2": "prettier",
+    "lint": "yarn run eslint ./src && yarn run prettier ./src",
     "lint-s": "lint-staged"
   },
   "devDependencies": {
