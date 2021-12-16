@@ -1,4 +1,3 @@
-import { uuid } from '../uuid';
 import { initialize, publish, addListener, removeListener, flush, getQueue } from './index';
 
 jest.mock('../uuid', () => ({ uuid: () => '123-uuid' }));
