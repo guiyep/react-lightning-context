@@ -102,6 +102,7 @@ The main idea ia following the same patterns and api that `React Context` provid
 - `useLightningContext`
 - `useLightningContextMutator`
 - `useLightningContextPropMutator`
+- `useLightningContextReducer`
 
 ## Try it
 
@@ -125,11 +126,11 @@ The main idea ia following the same patterns and api that `React Context` provid
 
 It follows a similar api that the `React.Context` provides. It only differs that we have a second parameter with configuration options.
 
-| Parameters       |                            | Types   | Required | Values                                                                                                                                                                                                                                                  |
-| ---------------- | -------------------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| First Parameter  | `defaultValue`             | Any     | **Yes**  | The default value to initialize the Context                                                                                                                                                                                                             |
-| Second Parameter | `Options`                  | Object  | **No**   |                                                                                                                                                                                                                                                         |
-|                  | `Options.waitBeforeUpdate` | Boolean |          | **Default: false**. This helps when you have a very volatile Context value, that is constantly mutating. This helps by debouncing the updates so you can update the components less times having a similar effect with what `concurrentMode` will have. |
+| Parameters       |                            | Types   | Required | Values                                                                                                                                                                                                                                            |
+| ---------------- | -------------------------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| First Parameter  | `defaultValue`             | Any     | **Yes**  | The default value to initialize the Context                                                                                                                                                                                                       |
+| Second Parameter | `Options`                  | Object  | **No**   |                                                                                                                                                                                                                                                   |
+|                  | `Options.waitBeforeUpdate` | Boolean |          | **Default: false**. This helps when you have a very volatile Context value, that is constantly mutating. This helps by debouncing the updates so you can update the components less times having a similar effect to the `concurrentMode` effect. |
 
 It **returns** the `Provider, Consumer, Mutator` components
 
@@ -274,4 +275,38 @@ setContextPropValue((propValue) => {
   // do anything you want
   return AnyNewPropValue;
 });
+```
+
+### useLightningContextReducer
+
+This hook allow you to create a reducer to mutating the context value. This is helpful when you have to setup complex logic to update the context value. It is very similar to `useReducer` but the affected state is the context value.
+
+| Properties       | Type                                        | Required | Description               |
+| ---------------- | ------------------------------------------- | -------- | ------------------------- |
+| `Object.reducer` | Function(currentValue, action) => nextValue | **Yes**  |                           |
+| `Context`        | `createLightningContext` returned object    | **Yes**  | The context you are using |
+
+It **returns** the dispatch function to execute actions in the context value.
+
+#### Example
+
+```jsx
+import { useLightningContextReducer } from 'react-lightning-context';
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'update':
+      return { valA: 333, valB: 222, dummy: numberOfRendersA + 1 };
+    default:
+      throw new Error();
+  }
+}
+
+const dispatch = useLightningContextReducer(reducer, Context);
+```
+
+#### How to call it?
+
+```js
+dispatch({ type: 'update' });
 ```
