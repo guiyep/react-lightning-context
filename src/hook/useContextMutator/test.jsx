@@ -1,31 +1,31 @@
 import React from 'react';
-import { useLightningContextMutator, useLightningContextPropMutator } from './index';
-import { useLightningContext } from '../useLightningContext';
-import { createLightningContext } from '../../lib/create-lightning-context';
+import { useContextMutator, useContextPropMutator } from './index';
+import { useContext } from '../useContext';
+import { createContext } from '../../lib/create-context';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
-describe('useLightningContextMutator', () => {
+describe('useContextMutator', () => {
   test('to not trigger uneeded updates', async () => {
-    const Context = createLightningContext({ valA: 123, valB: 222 });
+    const Context = createContext({ valA: 123, valB: 222 });
 
     let numberOfRendersA = 0;
     let numberOfRendersB = 0;
 
     const UseLightningContextComponentA = () => {
-      const { valA } = useLightningContext({ listenTo: ['valA'] }, Context);
+      const { valA } = useContext({ listenTo: ['valA'] }, Context);
       numberOfRendersA++;
       return <label data-testid="testA">{valA}</label>;
     };
 
     const UseLightningContextComponentB = () => {
-      const { valB } = useLightningContext({ listenTo: ['valB'] }, Context);
+      const { valB } = useContext({ listenTo: ['valB'] }, Context);
       numberOfRendersB++;
       return <label data-testid="testB">{valB}</label>;
     };
 
     const UseLightningContextMutatorComponent = () => {
-      const setContextValue = useLightningContextMutator(Context);
+      const setContextValue = useContextMutator(Context);
       return <button onClick={() => setContextValue(() => ({ valA: 333, valB: 222, dummy: numberOfRendersA + 1 }))} />;
     };
 
@@ -58,12 +58,12 @@ describe('useLightningContextMutator', () => {
   });
 
   test('mutator to pass value', async () => {
-    const Context = createLightningContext({ valA: 123, valB: 222 });
+    const Context = createContext({ valA: 123, valB: 222 });
 
     let valueRef;
 
     const UseLightningContextMutatorComponent = () => {
-      const setContextValue = useLightningContextMutator(Context);
+      const setContextValue = useContextMutator(Context);
       return (
         <button
           onClick={() =>
@@ -96,27 +96,27 @@ describe('useLightningContextMutator', () => {
   });
 });
 
-describe('useLightningContextPropMutator', () => {
+describe('useContextPropMutator', () => {
   test('to not trigger uneeded updates', async () => {
-    const Context = createLightningContext({ valA: 123, valB: 222 });
+    const Context = createContext({ valA: 123, valB: 222 });
 
     let numberOfRendersA = 0;
     let numberOfRendersB = 0;
 
     const UseLightningContextComponentA = () => {
-      const { valA } = useLightningContext({ listenTo: ['valA'] }, Context);
+      const { valA } = useContext({ listenTo: ['valA'] }, Context);
       numberOfRendersA++;
       return <label data-testid="testA">{valA}</label>;
     };
 
     const UseLightningContextComponentB = () => {
-      const { valB } = useLightningContext({ listenTo: ['valB'] }, Context);
+      const { valB } = useContext({ listenTo: ['valB'] }, Context);
       numberOfRendersB++;
       return <label data-testid="testB">{valB}</label>;
     };
 
     const UseLightningContextMutatorComponent = () => {
-      const setContextPropValue = useLightningContextPropMutator({ prop: 'valA' }, Context);
+      const setContextPropValue = useContextPropMutator({ prop: 'valA' }, Context);
       return (
         <button
           onClick={() =>
@@ -157,12 +157,12 @@ describe('useLightningContextPropMutator', () => {
   });
 
   test('mutator to pass value', async () => {
-    const Context = createLightningContext({ valA: 123, valB: 222 });
+    const Context = createContext({ valA: 123, valB: 222 });
 
     let valueRef;
 
     const UseLightningContextMutatorComponent = () => {
-      const setContextPropValue = useLightningContextPropMutator({ prop: 'valA' }, Context);
+      const setContextPropValue = useContextPropMutator({ prop: 'valA' }, Context);
       return (
         <button
           onClick={() =>

@@ -7,7 +7,7 @@ import { useDebouncedCallback as useDebouncedCallbackHook } from '../../hook/use
 
 const useDebouncedDisabledCallback = (f) => (val) => f(val);
 
-export const createLightningContext = (defaultValue, { waitBeforeUpdate } = { waitBeforeUpdate: false }) => {
+export const createContext = (defaultValue, { waitBeforeUpdate } = { waitBeforeUpdate: false }) => {
   const InternalContext = React.createContext({
     queueId: undefined,
     addBinding: () => {},

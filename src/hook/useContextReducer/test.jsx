@@ -1,26 +1,26 @@
 /* eslint-disable */
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { useLightningContextReducer } from './index';
-import { useLightningContext } from '../useLightningContext';
-import { createLightningContext } from '../../lib/create-lightning-context';
+import { useContextReducer } from './index';
+import { useContext } from '../useContext';
+import { createContext } from '../../lib/create-context';
 import '@testing-library/jest-dom';
 
-describe('useLightningContextReducer', () => {
+describe('useContextReducer', () => {
   test.only('to not trigger uneeded updates', async () => {
-    const Context = createLightningContext({ valA: 123, valB: 222 });
+    const Context = createContext({ valA: 123, valB: 222 });
 
     let numberOfRendersA = 0;
     let numberOfRendersB = 0;
 
     const UseLightningContextComponentA = () => {
-      const { valA } = useLightningContext({ listenTo: ['valA'] }, Context);
+      const { valA } = useContext({ listenTo: ['valA'] }, Context);
       numberOfRendersA++;
       return <label data-testid="testA">{valA}</label>;
     };
 
     const UseLightningContextComponentB = () => {
-      const { valB } = useLightningContext({ listenTo: ['valB'] }, Context);
+      const { valB } = useContext({ listenTo: ['valB'] }, Context);
       numberOfRendersB++;
       return <label data-testid="testB">{valB}</label>;
     };
@@ -35,7 +35,7 @@ describe('useLightningContextReducer', () => {
     }
 
     const UseLightningContextMutatorComponent = () => {
-      const dispatch = useLightningContextReducer(reducer, Context);
+      const dispatch = useContextReducer(reducer, Context);
       return <button onClick={() => dispatch({ type: 'update' })} />;
     };
 

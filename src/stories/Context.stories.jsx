@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import Button from '@atlaskit/button';
 import { get } from '../lib/get';
-import { createLightningContext } from '../lib/create-lightning-context';
-import { useLightningContext } from '../hook/useLightningContext';
+import { createContext } from '../lib/create-context';
+import { useContext } from '../hook/useContext';
 
 const defaultValue = { valueA: { a: { b: 222, r: 333 } }, valueB: 222, valueC: 444 };
-const LightningContext = createLightningContext(defaultValue);
+const LightningContext = createContext(defaultValue);
 const ReactContext = React.createContext(defaultValue);
 
 const Page = function ({ children }) {
@@ -17,7 +17,7 @@ const Container = function ({ children }) {
 };
 
 const UseLightningContextHookComponent = function ({ bind }) {
-  const result = useLightningContext({ listenTo: [bind] }, LightningContext);
+  const result = useContext({ listenTo: [bind] }, LightningContext);
   return (
     <div>
       {bind} : {result[bind]}

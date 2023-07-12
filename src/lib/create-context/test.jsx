@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import { createLightningContext } from './index';
+import { createContext } from './index';
 import { INTERNAL } from '../constants';
 import { flush } from '../pubsub/index';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
-describe('createLightningContext', () => {
+describe('createContext', () => {
   beforeEach(() => {
     flush();
   });
 
   test('to be defined', () => {
-    expect(createLightningContext).toBeDefined();
+    expect(createContext).toBeDefined();
   });
 
   test('to create context', () => {
-    const Context = createLightningContext({ test: 123 });
+    const Context = createContext({ test: 123 });
     expect(Context.Provider).toBeDefined();
     expect(Context.Consumer).toBeDefined();
     expect(Context.Mutator).toBeDefined();
@@ -24,7 +24,7 @@ describe('createLightningContext', () => {
   });
 
   test('to default to the initialValues and render once', () => {
-    const Context = createLightningContext({ valA: 123, valB: 222 });
+    const Context = createContext({ valA: 123, valB: 222 });
 
     let numberOfRenders = 0;
 
@@ -44,7 +44,7 @@ describe('createLightningContext', () => {
   });
 
   test('to update state only once', async () => {
-    const Context = createLightningContext({ valA: 123, valB: 222 });
+    const Context = createContext({ valA: 123, valB: 222 });
 
     let numberOfRenders = 0;
 
@@ -81,7 +81,7 @@ describe('createLightningContext', () => {
   });
 
   test('to update state only once on multiple listenTo', async () => {
-    const Context = createLightningContext({ valA: 123, valB: 222 });
+    const Context = createContext({ valA: 123, valB: 222 });
 
     let numberOfRenders = 0;
 
@@ -125,7 +125,7 @@ describe('createLightningContext', () => {
   });
 
   test('to not trigger uneeded updates', async () => {
-    const Context = createLightningContext({ valA: 123, valB: 222 });
+    const Context = createContext({ valA: 123, valB: 222 });
 
     let numberOfRendersA = 0;
     let numberOfRendersB = 0;
@@ -175,7 +175,7 @@ describe('createLightningContext', () => {
   });
 
   test('mutator to pass value', async () => {
-    const Context = createLightningContext({ valA: 123, valB: 222 });
+    const Context = createContext({ valA: 123, valB: 222 });
 
     let valueRef;
 

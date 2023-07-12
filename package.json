@@ -1,10 +1,10 @@
 {
-  "name": "react-lightning-context",
-  "version": "1.5.3",
-  "description": "a performant react context",
+  "name": "react-context",
+  "version": "1.6.0",
+  "description": "a performant and simple react context",
   "author": "guiyep",
   "license": "MIT",
-  "repository": "guiyep/react-lightning-context",
+  "repository": "guiyep/react-context",
   "main": "dist/index.min.js",
   "engines": {
     "node": ">=9",
@@ -25,7 +25,7 @@
     "build-prod": "NODE_ENV=production BABEL_ENV=production rollup -c",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "eslint": "eslint --fix",
+    "eslint": "eslint --fix ./src",
     "prettier": "prettier --write",
     "eslint2": "eslint",
     "prettier2": "prettier",
@@ -42,8 +42,8 @@
     "@storybook/addon-essentials": "^6.4.4",
     "@storybook/addon-links": "^6.4.4",
     "@storybook/react": "^6.4.4",
-    "@testing-library/jest-dom": "^5.15.1",
-    "@testing-library/react": "^12.1.2",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
     "@testing-library/react-hooks": "^7.0.2",
     "babel-eslint": "10.1.0",
     "babel-jest": "^27.4.2",
@@ -72,8 +72,8 @@
     "postcss": "^8.3.9",
     "prettier": "2.3.2",
     "prop-types": "15.7.2",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-test-renderer": "^17.0.2",
     "react-testing-library": "8.0.1",
     "rollup": "2.60.2",
@@ -92,8 +92,8 @@
     "dist"
   ],
   "peerDependencies": {
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8"

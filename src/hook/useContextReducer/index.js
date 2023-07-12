@@ -1,7 +1,7 @@
 import { useContext, useCallback } from 'react';
 import { INTERNAL } from '../../lib/constants';
 
-export const useLightningContextReducer = (reducer, Context) => {
+export const useContextReducer = (reducer, Context) => {
   const { setContextValue } = useContext(Context[INTERNAL].InternalContext);
 
   const dispatch = useCallback(

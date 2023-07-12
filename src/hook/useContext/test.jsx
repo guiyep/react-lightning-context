@@ -1,17 +1,17 @@
 import React from 'react';
-import { useLightningContext } from './index';
-import { createLightningContext } from '../../lib/create-lightning-context';
+import { useContext } from './index';
+import { createContext } from '../../lib/create-context';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
-describe('useLightningContext', () => {
+describe('useContext', () => {
   test('to default to the initialValues and render once', () => {
-    const Context = createLightningContext({ valA: 123, valB: 222 });
+    const Context = createContext({ valA: 123, valB: 222 });
 
     let numberOfRenders = 0;
 
     const UseLightningContextComponent = () => {
-      const { valA } = useLightningContext({ listenTo: ['valA'] }, Context);
+      const { valA } = useContext({ listenTo: ['valA'] }, Context);
       numberOfRenders++;
       return valA;
     };
@@ -27,12 +27,12 @@ describe('useLightningContext', () => {
   });
 
   test('to update state only once', async () => {
-    const Context = createLightningContext({ valA: 123, valB: 222 });
+    const Context = createContext({ valA: 123, valB: 222 });
 
     let numberOfRenders = 0;
 
     const UseLightningContextComponent = () => {
-      const { valA } = useLightningContext({ listenTo: ['valA'] }, Context);
+      const { valA } = useContext({ listenTo: ['valA'] }, Context);
       numberOfRenders++;
       return <label data-testid="test">{valA}</label>;
     };
@@ -66,12 +66,12 @@ describe('useLightningContext', () => {
   });
 
   test('to update state only once on multiple listenTo', async () => {
-    const Context = createLightningContext({ valA: 123, valB: 222 });
+    const Context = createContext({ valA: 123, valB: 222 });
 
     let numberOfRenders = 0;
 
     const UseLightningContextComponent = () => {
-      const { valA, valB } = useLightningContext({ listenTo: ['valA', 'valB'] }, Context);
+      const { valA, valB } = useContext({ listenTo: ['valA', 'valB'] }, Context);
       numberOfRenders++;
       return (
         <label data-testid="test">
@@ -111,19 +111,19 @@ describe('useLightningContext', () => {
   });
 
   test('to not trigger uneeded updates', async () => {
-    const Context = createLightningContext({ valA: 123, valB: 222 });
+    const Context = createContext({ valA: 123, valB: 222 });
 
     let numberOfRendersA = 0;
     let numberOfRendersB = 0;
 
     const UseLightningContextComponentA = () => {
-      const { valA } = useLightningContext({ listenTo: ['valA'] }, Context);
+      const { valA } = useContext({ listenTo: ['valA'] }, Context);
       numberOfRendersA++;
       return <label data-testid="testA">{valA}</label>;
     };
 
     const UseLightningContextComponentB = () => {
-      const { valB } = useLightningContext({ listenTo: ['valB'] }, Context);
+      const { valB } = useContext({ listenTo: ['valB'] }, Context);
       numberOfRendersB++;
       return <label data-testid="testB">{valB}</label>;
     };

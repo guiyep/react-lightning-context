@@ -3,12 +3,12 @@ import { set } from '../../lib/set';
 import { get } from '../../lib/get';
 import { INTERNAL } from '../../lib/constants';
 
-export const useLightningContextMutator = (Context) => {
+export const useContextMutator = (Context) => {
   const { setContextValue } = useContext(Context[INTERNAL].InternalContext);
   return setContextValue;
 };
 
-export const useLightningContextPropMutator = ({ prop }, Context) => {
+export const useContextPropMutator = ({ prop }, Context) => {
   const { setContextValue } = useContext(Context[INTERNAL].InternalContext);
 
   const setContextPropValue = useCallback(
