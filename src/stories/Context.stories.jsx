@@ -17,7 +17,7 @@ const Container = function ({ children }) {
 };
 
 const UseLightningContextHookComponent = function ({ bind }) {
-  const result = useContext({ listenTo: [bind] }, LightningContext);
+  const result = useContext({ slices: [bind] }, LightningContext);
   return (
     <div>
       {bind} : {result[bind]}

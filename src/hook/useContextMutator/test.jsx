@@ -1,5 +1,5 @@
 import React from 'react';
-import { useContextMutator, useContextPropMutator } from './index';
+import { useContextMutator, useContextSliceMutator } from './index';
 import { useContext } from '../useContext';
 import { createContext } from '../../lib/create-context';
 import '@testing-library/jest-dom';
@@ -13,13 +13,13 @@ describe('useContextMutator', () => {
     let numberOfRendersB = 0;
 
     const UseLightningContextComponentA = () => {
-      const { valA } = useContext({ listenTo: ['valA'] }, Context);
+      const { valA } = useContext({ slices: ['valA'] }, Context);
       numberOfRendersA++;
       return <label data-testid="testA">{valA}</label>;
     };
 
     const UseLightningContextComponentB = () => {
-      const { valB } = useContext({ listenTo: ['valB'] }, Context);
+      const { valB } = useContext({ slices: ['valB'] }, Context);
       numberOfRendersB++;
       return <label data-testid="testB">{valB}</label>;
     };
@@ -96,7 +96,7 @@ describe('useContextMutator', () => {
   });
 });
 
-describe('useContextPropMutator', () => {
+describe('useContextSliceMutator', () => {
   test('to not trigger uneeded updates', async () => {
     const Context = createContext({ valA: 123, valB: 222 });
 
@@ -104,19 +104,19 @@ describe('useContextPropMutator', () => {
     let numberOfRendersB = 0;
 
     const UseLightningContextComponentA = () => {
-      const { valA } = useContext({ listenTo: ['valA'] }, Context);
+      const { valA } = useContext({ slices: ['valA'] }, Context);
       numberOfRendersA++;
       return <label data-testid="testA">{valA}</label>;
     };
 
     const UseLightningContextComponentB = () => {
-      const { valB } = useContext({ listenTo: ['valB'] }, Context);
+      const { valB } = useContext({ slices: ['valB'] }, Context);
       numberOfRendersB++;
       return <label data-testid="testB">{valB}</label>;
     };
 
     const UseLightningContextMutatorComponent = () => {
-      const setContextPropValue = useContextPropMutator({ prop: 'valA' }, Context);
+      const setContextPropValue = useContextSliceMutator({ slice: 'valA' }, Context);
       return (
         <button
           onClick={() =>
@@ -162,7 +162,7 @@ describe('useContextPropMutator', () => {
     let valueRef;
 
     const UseLightningContextMutatorComponent = () => {
-      const setContextPropValue = useContextPropMutator({ prop: 'valA' }, Context);
+      const setContextPropValue = useContextSliceMutator({ slice: 'valA' }, Context);
       return (
         <button
           onClick={() =>

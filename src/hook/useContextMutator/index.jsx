@@ -8,17 +8,17 @@ export const useContextMutator = (Context) => {
   return setContextValue;
 };
 
-export const useContextPropMutator = ({ prop }, Context) => {
+export const useContextSliceMutator = ({ slice }, Context) => {
   const { setContextValue } = useContext(Context[INTERNAL].InternalContext);
 
   const setContextPropValue = useCallback(
     (f) => {
       setContextValue((value) => {
         const newVal = { ...value };
-        return set(newVal, prop, f(get(value, prop)));
+        return set(newVal, slice, f(get(value, slice)));
       });
     },
-    [prop, setContextValue],
+    [slice, setContextValue],
   );
 
   return setContextPropValue;

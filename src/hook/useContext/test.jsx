@@ -11,7 +11,7 @@ describe('useContext', () => {
     let numberOfRenders = 0;
 
     const UseLightningContextComponent = () => {
-      const { valA } = useContext({ listenTo: ['valA'] }, Context);
+      const { valA } = useContext({ slices: ['valA'] }, Context);
       numberOfRenders++;
       return valA;
     };
@@ -32,7 +32,7 @@ describe('useContext', () => {
     let numberOfRenders = 0;
 
     const UseLightningContextComponent = () => {
-      const { valA } = useContext({ listenTo: ['valA'] }, Context);
+      const { valA } = useContext({ slices: ['valA'] }, Context);
       numberOfRenders++;
       return <label data-testid="test">{valA}</label>;
     };
@@ -65,13 +65,13 @@ describe('useContext', () => {
     expect(numberOfRenders).toEqual(2);
   });
 
-  test('to update state only once on multiple listenTo', async () => {
+  test('to update state only once on multiple slices', async () => {
     const Context = createContext({ valA: 123, valB: 222 });
 
     let numberOfRenders = 0;
 
     const UseLightningContextComponent = () => {
-      const { valA, valB } = useContext({ listenTo: ['valA', 'valB'] }, Context);
+      const { valA, valB } = useContext({ slices: ['valA', 'valB'] }, Context);
       numberOfRenders++;
       return (
         <label data-testid="test">
@@ -117,13 +117,13 @@ describe('useContext', () => {
     let numberOfRendersB = 0;
 
     const UseLightningContextComponentA = () => {
-      const { valA } = useContext({ listenTo: ['valA'] }, Context);
+      const { valA } = useContext({ slices: ['valA'] }, Context);
       numberOfRendersA++;
       return <label data-testid="testA">{valA}</label>;
     };
 
     const UseLightningContextComponentB = () => {
-      const { valB } = useContext({ listenTo: ['valB'] }, Context);
+      const { valB } = useContext({ slices: ['valB'] }, Context);
       numberOfRendersB++;
       return <label data-testid="testB">{valB}</label>;
     };

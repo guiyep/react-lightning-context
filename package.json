@@ -1,10 +1,10 @@
 {
-  "name": "react-context",
-  "version": "1.6.0",
+  "name": "react-lightning-context",
+  "version": "2.0.0",
   "description": "a performant and simple react context",
   "author": "guiyep",
   "license": "MIT",
-  "repository": "guiyep/react-context",
+  "repository": "guiyep/react-lightning-context",
   "main": "dist/index.min.js",
   "engines": {
     "node": ">=9",
@@ -30,7 +30,8 @@
     "eslint2": "eslint",
     "prettier2": "prettier",
     "lint": "yarn run eslint ./src && yarn run prettier ./src",
-    "lint-s": "lint-staged"
+    "lint-s": "lint-staged",
+    "docs": "docsify serve docs"
   },
   "devDependencies": {
     "@atlaskit/button": "^16.1.4",
@@ -51,6 +52,7 @@
     "babel-plugin-transform-react-remove-prop-types": "0.4.24",
     "babel-preset-minify": "0.5.1",
     "core-js": "3.19.2",
+    "docsify-cli": "^4.4.4",
     "eslint": "^8.4.1",
     "eslint-config-airbnb": "19.0.1",
     "eslint-config-prettier": "8.3.0",

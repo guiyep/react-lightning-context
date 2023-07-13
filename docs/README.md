@@ -1,15 +1,8 @@
-# react-context
+# react-lightning-context
 
-<p align="center">
-  <img src="./assets/logo.png?raw=true">
-</p>
-<p align="center">
-  <a href="https://www.npmjs.com/package/react-context">
-    <img src="https://img.shields.io/npm/v/react-context.svg">
-  </a>
-  <img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg">
-  <img src="https://img.shields.io/bundlephobia/minzip/react-context">
-</p>
+> This is a performant and simple react context
+
+[![NPM](https://img.shields.io/npm/v/react-lightning-context.svg)](https://www.npmjs.com/package/react-lightning-context) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 A super performant lightning fast context library that only re-renders what has changed and nothing else. This library is a drop in replacement of the official `React Context`.
 
@@ -23,16 +16,16 @@ This is **NOT** a state management library. Just a performant `React Context` re
 
 The bordered area is where the element is re-rendered. In the examples, the button is updating only one of the properties in the internal Context value.
 
-| Using `react-context`                      | Using `React Context`                   |
-| ------------------------------------------ | --------------------------------------- |
-| ![with gif](./assets/with-op.gif?raw=true) | ![without gif](./assets/without-op.gif) |
+| Using `react-lightning-context`           | Using `React Context`                  |
+| ----------------------------------------- | -------------------------------------- |
+| ![with gif](./media/with-op.gif?raw=true) | ![without gif](./media/without-op.gif) |
 
-As you can see `react-context` only re-renders what has only changed vs `React Context` that re-renders everything within the `Provider`
+As you can see `react-lightning-context` only re-renders what has only changed vs `React Context` that re-renders everything within the `Provider`
 
 ## How to install
 
 ```terminal
-  yarn add react-context
+  yarn add react-lightning-context
 ```
 
 ## How to use it without Hooks
@@ -40,73 +33,71 @@ As you can see `react-context` only re-renders what has only changed vs `React C
 The main idea is following the same patterns and api that `React Context` provides with a little twist.
 
 ```jsx
-  import { createContext } from 'react-context';
-  const defaultValue = { valueA: { a: { b: 222, r: 333 } }, valueB: 222, valueC: 444 };
-  const Context = createContext(defaultValue);
+import { createContext } from 'react-lightning-context';
+const defaultValue = { valueA: { a: { b: 222, r: 333 } }, valueB: 222, valueC: 444 };
+const Context = createContext(defaultValue);
 
-  // `listenTo` can be (some examples):
-  // - valueA -> { a: { b: 222, r: 333 } }
-  // - valueA.a -> { b: 222, r: 333 }
-  // - valueA.a.b -> 222
+// `slices` can be (some examples):
+// - valueA -> { a: { b: 222, r: 333 } }
+// - valueA.a -> { b: 222, r: 333 }
+// - valueA.a.b -> 222
 
-  const ExampleA = () => (
-    <Context.Provider>
-      <Context.Consumer listenTo={['valueC']}>
-        {({ valueC }) => <label>{valueC}</label> }
-      </Context.Consumer>
-    </Context.Provider>);
-};
+const ExampleA = () => (
+  <Context.Provider>
+    <Context.Consumer slices={['valueC']}>{({ valueC }) => <label>{valueC}</label>}</Context.Consumer>
+  </Context.Provider>
+);
 ```
 
 ### What is going on here?
 
 - `createContext` is creating the context.
 - `Context.Provider` is defining the area in which the context data is going to be shared.
-- `Context.Consumer` will listen to changes in the Context value and will re-rendered **ONLY** when the values on the `listenTo` prop in the context has changed. You can listen to more than one field, or you can go deep down into the props. ex: `valueA.a.r`.
+- `Context.Consumer` will listen to changes in the Context value and will re-rendered **ONLY** when the values on the `slices` prop in the context has changed. You can listen to more than one field, or you can go deep down into the props. ex: `valueA.a.r`.
 
 ## How to use it with Hooks
 
 The main idea ia following the same patterns and api that `React Context` provides with a little twist. This is doing the same as the previous example but with hooks.
 
 ```jsx
-  import { createContext, useContext } from 'react-context';
-  const defaultValue = { valueA: { a: { b: 222, r: 333 } }, valueB: 222, valueC: 444 };
-  const Context = createContext(defaultValue);
+import { createContext, useContext } from 'react-lightning-context';
+const defaultValue = { valueA: { a: { b: 222, r: 333 } }, valueB: 222, valueC: 444 };
+const Context = createContext(defaultValue);
 
-  const UseLightningContextHookComponent = () => {
-    const { valueC } = useContext({ listenTo: ['valueC'] }, Context);
-    return <label>{valueC}</label>;
-  };
-
-  // `listenTo` can be (some examples):
-  // - valueA -> { a: { b: 222, r: 333 } }
-  // - valueA.a -> { b: 222, r: 333 }
-  // - valueA.a.b -> 222
-
-  const ExampleA = () => (
-    <Context.Provider>
-      <UseLightningContextHookComponent />
-    </Context.Provider>);
+const UseLightningContextHookComponent = () => {
+  const { valueC } = useContext({ slices: ['valueC'] }, Context);
+  return <label>{valueC}</label>;
 };
+
+// `slices` can be (some examples):
+// - valueA -> { a: { b: 222, r: 333 } }
+// - valueA.a -> { b: 222, r: 333 }
+// - valueA.a.b -> 222
+
+const ExampleA = () => (
+  <Context.Provider>
+    <UseLightningContextHookComponent />
+  </Context.Provider>
+);
 ```
 
 ### What is going on here?
 
 - `createContext` is creating the context.
 - `Context.Provider` is defining the area in which the context data is going to be shared.
-- `useContext` will listen to changes in the Context value and will be updated **ONLY** when the values on the `listenTo` prop in the context has changed. You can listen to more than one field, or you can go deep down into the props. ex: `valueA.a.r`.
+- `useContext` will listen to changes in the Context value and will be updated **ONLY** when the values on the `slices` prop in the context has changed. You can listen to more than one field, or you can go deep down into the props. ex: `valueA.a.r`.
 
 ## What does this package exports?
 
 - `createContext`
 - `useContext`
 - `useContextMutator`
-- `useContextPropMutator`
+- `useContextSliceMutator`
 - `useContextReducer`
 
 ## Try it
 
-[![Edit react-context](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/beautiful-currying-i7xin)
+[![Edit react-lightning-context](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/beautiful-currying-i7xin)
 
 ## API Documentation
 
@@ -120,7 +111,7 @@ The main idea ia following the same patterns and api that `React Context` provid
 | `useContext` **renamed to** `useContext`             | **Yes**     | A way of consuming a context value using hook. Similar to useContext                |
 | `Context.Mutator`                                    | **New**     | A component that provides a way of mutating the value of the context                |
 | `useContextMutator`                                  | **New**     | A Hook that provides a way of mutating the value of the context                     |
-| `useContextPropMutator`                              | **New**     | A Hook that provides a way of mutating only **one prop** of the context             |
+| `useContextSliceMutator`                             | **New**     | A Hook that provides a way of mutating only **one prop** of the context             |
 
 ### createContext
 
@@ -146,10 +137,10 @@ const Context = createContext({ value: 'test' }, { waitBeforeUpdate: true });
 
 This does not have any props. Same as `React.Context` it wraps the context experience.
 
-#### Example
+#### Context.Provider Example
 
 ```jsx
-import { createContext } from 'react-context';
+import { createContext } from 'react-lightning-context';
 const Context = createContext({ value: 'test' });
 
 const TopLevelExperience = () => {
@@ -163,19 +154,19 @@ This need to be nested inside a `Provider` component. Same as `React.Context` it
 
 | Properties | Type            | Required | Description                                                                      |
 | ---------- | --------------- | -------- | -------------------------------------------------------------------------------- |
-| `listenTo` | Array< String > | **Yes**  | Properties from the `Context.value` that you want to listen to. It can be nested |
+| `slices`   | Array< String > | **Yes**  | Properties from the `Context.value` that you want to listen to. It can be nested |
 
 It **returns** a function that is executed passing a mapped object with the binding
 
-#### Example
+#### Context.Consumer Example
 
 ```jsx
-import { createContext } from 'react-context';
+import { createContext } from 'react-lightning-context';
 const Context = createContext({ value: { first: 1, second: 2 } });
 
 const TopLevelExperience = () => {
   return <Context.Provider>
-    <Context.Consumer listenTo={['value.first', 'value.seconds']}>
+    <Context.Consumer slices={['value.first', 'value.seconds']}>
     {
       (values) => //... anything to render
     }
@@ -186,7 +177,7 @@ const TopLevelExperience = () => {
 
 #### Return value example
 
-if **listenTo** is `['value.first', 'value.seconds']` the render function that will execute is
+if **slices** is `['value.first', 'value.seconds']` the render function that will execute is
 
 ```js
   ({ 'value.first': 123, 'value.seconds': 333 }) => //...anything to render
@@ -196,14 +187,14 @@ if **listenTo** is `['value.first', 'value.seconds']` the render function that w
 
 Same as `Consumer` but as a Hook api (similar to the `useContext` hook)
 
-| Properties        | Type                            | Required | Description                                                                      |
-| ----------------- | ------------------------------- | -------- | -------------------------------------------------------------------------------- |
-| `Object.listenTo` | Array<String>                   | **Yes**  | Properties from the `Context.value` that you want to listen to. It can be nested |
-| `Context`         | `createContext` returned object | **Yes**  | The context you are using                                                        |
+| Properties      | Type                            | Required | Description                                                                      |
+| --------------- | ------------------------------- | -------- | -------------------------------------------------------------------------------- |
+| `Object.slices` | Array<String>                   | **Yes**  | Properties from the `Context.value` that you want to listen to. It can be nested |
+| `Context`       | `createContext` returned object | **Yes**  | The context you are using                                                        |
 
 ```js
-import { useContext } from 'react-context';
-const result = useContext({ listenTo: [...] }, Context);
+import { useContext } from 'react-lightning-context';
+const result = useContext({ slices: [...] }, Context);
 ```
 
 ### Context.Mutator
@@ -225,10 +216,10 @@ setContextValue((value) => {
 });
 ```
 
-#### Example
+#### setContextValue Example
 
 ```jsx
-import { createContext } from 'react-context';
+import { createContext } from 'react-lightning-context';
 const Context = createContext({ value: { first: 1, second: 2 } });
 
 const TopLevelExperience = () => {
@@ -250,20 +241,20 @@ Same as `Context.Mutator` but as a Hook.
 | ---------- | ------------------------------- | -------- | ------------------------- |
 | `Context`  | `createContext` returned object | **Yes**  | The context you are using |
 
-### useContextPropMutator
+### useContextSliceMutator
 
 This is same as the `useContextMutator` but only mutate one property of the `Context value`. As a result no need to merge anything.
 
-| Properties    | Type                            | Required | Description                                             |
-| ------------- | ------------------------------- | -------- | ------------------------------------------------------- |
-| `Object.prop` | String                          | **Yes**  | The prop you are mutating, can be a nested property too |
-| `Context`     | `createContext` returned object | **Yes**  | The context you are using                               |
+| Properties     | Type                            | Required | Description                                             |
+| -------------- | ------------------------------- | -------- | ------------------------------------------------------- |
+| `Object.slice` | String                          | **Yes**  | The prop you are mutating, can be a nested property too |
+| `Context`      | `createContext` returned object | **Yes**  | The context you are using                               |
 
-#### Example
+#### useContextSliceMutator Example
 
 ```jsx
-import { useContextPropMutator } from 'react-context';
-const setContextPropValue = useContextPropMutator({ prop: 'object.valueA.valueB' }, Context);
+import { useContextSliceMutator } from 'react-lightning-context';
+const setContextPropValue = useContextSliceMutator({ slice: 'object.valueA.valueB' }, Context);
 ```
 
 #### Example calling setContextPropValue
@@ -288,10 +279,10 @@ This hook allow you to create a reducer to mutating the context value. This is h
 
 It **returns** the dispatch function to execute actions in the context value.
 
-#### Example
+#### useContextReducer Example
 
 ```jsx
-import { useContextReducer } from 'react-context';
+import { useContextReducer } from 'react-lightning-context';
 
 function reducer(state, action) {
   switch (action.type) {

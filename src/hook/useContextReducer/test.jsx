@@ -14,13 +14,13 @@ describe('useContextReducer', () => {
     let numberOfRendersB = 0;
 
     const UseLightningContextComponentA = () => {
-      const { valA } = useContext({ listenTo: ['valA'] }, Context);
+      const { valA } = useContext({ slices: ['valA'] }, Context);
       numberOfRendersA++;
       return <label data-testid="testA">{valA}</label>;
     };
 
     const UseLightningContextComponentB = () => {
-      const { valB } = useContext({ listenTo: ['valB'] }, Context);
+      const { valB } = useContext({ slices: ['valB'] }, Context);
       numberOfRendersB++;
       return <label data-testid="testB">{valB}</label>;
     };

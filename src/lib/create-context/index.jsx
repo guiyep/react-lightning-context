@@ -88,8 +88,8 @@ export const createContext = (defaultValue, { waitBeforeUpdate } = { waitBeforeU
       const { setContextValue } = useContext(InternalContext);
       return children({ setContextValue });
     },
-    Consumer: ({ listenTo, children }) => {
-      const resultValue = useInternalContext({ listenTo, defaultValue }, InternalContext);
+    Consumer: ({ slices, children }) => {
+      const resultValue = useInternalContext({ slices, defaultValue }, InternalContext);
       return children(resultValue);
     },
     [INTERNAL]: {
