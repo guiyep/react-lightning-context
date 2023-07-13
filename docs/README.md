@@ -91,6 +91,7 @@ const ExampleA = () => (
 
 - `createContext`
 - `useContext`
+- `useContextSlice`
 - `useContextMutator`
 - `useContextSliceMutator`
 - `useContextReducer`
