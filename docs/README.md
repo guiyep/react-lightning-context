@@ -108,10 +108,11 @@ const ExampleA = () => (
 | `Class.contextType`                                  | **No**      |                                                                                     |
 | `Context.displayName`                                | **Yes**     |                                                                                     |
 | `Context.Consumer`                                   | **Yes**     | A way of consuming a context value using components.                                |
-| `useContext` **renamed to** `useContext`             | **Yes**     | A way of consuming a context value using hook. Similar to useContext                |
+| `useContext`                                         | **Yes**     | A way of consuming a context slices (one or many) using hook. Similar to useContext |
+| `useContextSlice`                                    | **Yes**     | A way of consuming a context slice using hook. Similar to useContext                |
 | `Context.Mutator`                                    | **New**     | A component that provides a way of mutating the value of the context                |
 | `useContextMutator`                                  | **New**     | A Hook that provides a way of mutating the value of the context                     |
-| `useContextSliceMutator`                             | **New**     | A Hook that provides a way of mutating only **one prop** of the context             |
+| `useContextSliceMutator`                             | **New**     | A Hook that provides a way of mutating only **one slice** of the context            |
 
 ### createContext
 
@@ -195,6 +196,20 @@ Same as `Consumer` but as a Hook api (similar to the `useContext` hook)
 ```js
 import { useContext } from 'react-lightning-context';
 const result = useContext({ slices: [...] }, Context);
+```
+
+### useContextSlice
+
+Same as `Consumer` but as a Hook api (similar to the `useContext` hook)
+
+| Properties | Type                            | Required | Description                                                                      |
+| ---------- | ------------------------------- | -------- | -------------------------------------------------------------------------------- |
+| `slice`    | String                          | **Yes**  | Properties from the `Context.value` that you want to listen to. It can be nested |
+| `Context`  | `createContext` returned object | **Yes**  | The context you are using                                                        |
+
+```js
+import { useContextSlice } from 'react-lightning-context';
+const sliceFromContext = useContextSlice('property', Context);
 ```
 
 ### Context.Mutator
