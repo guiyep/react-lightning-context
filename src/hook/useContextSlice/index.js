@@ -1,4 +1,3 @@
-import React from 'react';
 import { INTERNAL } from '../../lib/constants';
 import { useInternalContext } from '../useInternalContext';
 
