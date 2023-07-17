@@ -35,9 +35,9 @@ As you can see `react-lightning-context` only re-renders what has only changed v
   yarn add react-lightning-context
 ```
 
-## What to know more?
+## API Documentation
 
-You can check the full library documentation in [here](https://64af60a4a53532089933a6ea--gentle-melba-9db8e9.netlify.app).
+You can check the full library documentation in [here](https://gentle-melba-9db8e9.netlify.app/#/)!!!!.
 
 ## How to use it with an easy example
 

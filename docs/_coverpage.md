@@ -1,4 +1,4 @@
-![logo](media/logo.png)
+![logo](assets/logo.png)
 
 # react-lightning-context
 
