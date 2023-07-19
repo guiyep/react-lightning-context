@@ -173,20 +173,25 @@ Same as `Context.Mutator` but as a Hook.
 | ---------- | ------------------------------- | -------- | ------------------------- |
 | `Context`  | `createContext` returned object | **Yes**  | The context you are using |
 
+```jsx
+import { useContextMutator } from 'react-lightning-context';
+const setContextValue = useContextMutator(Context);
+```
+
 ### useContextSliceMutator
 
 This is same as the `useContextMutator` but only mutate one property of the `Context value`. As a result no need to merge anything.
 
-| Properties     | Type                            | Required | Description                                             |
-| -------------- | ------------------------------- | -------- | ------------------------------------------------------- |
-| `Object.slice` | String                          | **Yes**  | The prop you are mutating, can be a nested property too |
-| `Context`      | `createContext` returned object | **Yes**  | The context you are using                               |
+| Properties | Type                            | Required | Description                                             |
+| ---------- | ------------------------------- | -------- | ------------------------------------------------------- |
+| `slice`    | String                          | **Yes**  | The prop you are mutating, can be a nested property too |
+| `Context`  | `createContext` returned object | **Yes**  | The context you are using                               |
 
 #### useContextSliceMutator Example
 
 ```jsx
 import { useContextSliceMutator } from 'react-lightning-context';
-const setContextPropValue = useContextSliceMutator({ slice: 'object.valueA.valueB' }, Context);
+const setContextPropValue = useContextSliceMutator('object.valueA.valueB', Context);
 ```
 
 #### Example calling setContextPropValue

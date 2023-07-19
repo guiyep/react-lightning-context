@@ -1,6 +1,6 @@
 {
   "name": "react-lightning-context",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "a performant and simple react context",
   "author": "guiyep",
   "license": "MIT",
@@ -29,7 +29,7 @@
     "prettier": "prettier --write",
     "eslint2": "eslint",
     "prettier2": "prettier",
-    "lint": "yarn run eslint ./src && yarn run prettier ./src",
+    "lint": "yarn run eslint ./src && yarn run prettier ./src ",
     "lint-s": "lint-staged",
     "docs": "docsify serve docs"
   },

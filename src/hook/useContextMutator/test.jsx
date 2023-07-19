@@ -116,7 +116,7 @@ describe('useContextSliceMutator', () => {
     };
 
     const UseLightningContextMutatorComponent = () => {
-      const setContextPropValue = useContextSliceMutator({ slice: 'valA' }, Context);
+      const setContextPropValue = useContextSliceMutator('valA', Context);
       return (
         <button
           onClick={() =>
@@ -162,7 +162,7 @@ describe('useContextSliceMutator', () => {
     let valueRef;
 
     const UseLightningContextMutatorComponent = () => {
-      const setContextPropValue = useContextSliceMutator({ slice: 'valA' }, Context);
+      const setContextPropValue = useContextSliceMutator('valA', Context);
       return (
         <button
           onClick={() =>

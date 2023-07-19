@@ -37,7 +37,7 @@ As you can see `react-lightning-context` only re-renders what has only changed v
 
 ## API Documentation
 
-You can check the full library documentation in [here](https://gentle-melba-9db8e9.netlify.app/#/)!!!!.
+You can check the full library documentation [here](https://gentle-melba-9db8e9.netlify.app/#/)!!!!.
 
 ## How to use it with an easy example
 
