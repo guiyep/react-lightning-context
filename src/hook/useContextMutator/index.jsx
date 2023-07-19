@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from 'react';
+import { useContext, useCallback } from 'react';
 import { set } from '../../lib/set';
 import { get } from '../../lib/get';
 import { INTERNAL } from '../../lib/constants';

@@ -178,6 +178,15 @@ import { useContextMutator } from 'react-lightning-context';
 const setContextValue = useContextMutator(Context);
 ```
 
+#### Example calling setContextValue from useContextMutator
+
+```js
+setContextPropValue((contextValue) => {
+  // do anything you want
+  return AnyNewContextValue;
+});
+```
+
 ### useContextSliceMutator
 
 This is same as the `useContextMutator` but only mutate one property of the `Context value`. As a result no need to merge anything.
