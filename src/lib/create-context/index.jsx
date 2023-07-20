@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo, useRef } from 'react';
+import React, { useCallback, useContext, useLayoutEffect, useMemo, useRef } from 'react';
 import { get } from '../get';
 import { initialize, publish } from '../pubsub';
 import { INTERNAL } from '../constants';
@@ -17,7 +17,7 @@ export const createContext = (defaultValue, { waitBeforeUpdate } = { waitBeforeU
   const useDebouncedCallback = !waitBeforeUpdate ? useDebouncedDisabledCallback : useDebouncedCallbackHook;
 
   return {
-    Provider: ({ children }) => {
+    Provider: ({ children, initialValue }) => {
       const queueIdRef = useRef();
       const bindingsRef = useRef({});
       const valueRef = useRef(defaultValue);
@@ -81,6 +81,12 @@ export const createContext = (defaultValue, { waitBeforeUpdate } = { waitBeforeU
 
         valueRef.current = nextValue;
       }, waitBeforeUpdate);
+
+      useLayoutEffect(() => {
+        if (contextRef.current === undefined || initialValue !== undefined) {
+          setContextValue(() => initialValue);
+        }
+      }, [initialValue, setContextValue]);
 
       return <InternalContext.Provider value={contextRef.current}>{children}</InternalContext.Provider>;
     },

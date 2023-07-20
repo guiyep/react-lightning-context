@@ -2,22 +2,18 @@ import React, { useContext, useState } from 'react';
 import Button from '@atlaskit/button';
 import { get } from '../lib/get';
 import { createContext } from '../lib/create-context';
-import { useContext } from '../hook/useContext';
+import { useContext as useContextLightning } from '../hook/useContext';
 
 const defaultValue = { valueA: { a: { b: 222, r: 333 } }, valueB: 222, valueC: 444 };
 const LightningContext = createContext(defaultValue);
 const ReactContext = React.createContext(defaultValue);
 
-const Page = function ({ children }) {
-  return <div style={{ fontFamily: 'arial' }}>{children}</div>;
-};
+const Page = ({ children }) => <div style={{ fontFamily: 'arial' }}>{children}</div>;
 
-const Container = function ({ children }) {
-  return <div style={{ display: 'flex' }}>This is within another component: {children}</div>;
-};
+const Container = ({ children }) => <div style={{ display: 'flex' }}>This is within another component: {children}</div>;
 
-const UseLightningContextHookComponent = function ({ bind }) {
-  const result = useContext({ slices: [bind] }, LightningContext);
+const UseLightningContextHookComponent = ({ bind }) => {
+  const result = useContextLightning({ slices: [bind] }, LightningContext);
   return (
     <div>
       {bind} : {result[bind]}
@@ -25,7 +21,7 @@ const UseLightningContextHookComponent = function ({ bind }) {
   );
 };
 
-const UseReactContextHookComponent = function ({ bind }) {
+const UseReactContextHookComponent = ({ bind }) => {
   const result = useContext(ReactContext);
   console.log(result);
   return (
@@ -35,35 +31,33 @@ const UseReactContextHookComponent = function ({ bind }) {
   );
 };
 
-const ExampleA = function () {
-  return (
-    <Page>
-      <LightningContext.Provider>
-        <LightningContext.Mutator>
-          {({ setContextValue }) => (
-            <Button
-              appearance="primary"
-              onClick={() =>
-                setContextValue(() => ({ valueA: { a: { b: 222, r: Math.random() } }, valueB: 222, valueC: 444 }))
-              }
-              style={{ marginBottom: '20px' }}
-            >
-              {' '}
-              Generate random valueA{' '}
-            </Button>
-          )}
-        </LightningContext.Mutator>
-        <Container>
-          <UseLightningContextHookComponent bind="valueA.a.r" />
-        </Container>
-        <UseLightningContextHookComponent bind="valueB" />
-        <UseLightningContextHookComponent bind="valueC" />
-      </LightningContext.Provider>
-    </Page>
-  );
-};
+const ExampleA = () => (
+  <Page>
+    <LightningContext.Provider>
+      <LightningContext.Mutator>
+        {({ setContextValue }) => (
+          <Button
+            appearance="primary"
+            onClick={() =>
+              setContextValue(() => ({ valueA: { a: { b: 222, r: Math.random() } }, valueB: 222, valueC: 444 }))
+            }
+            style={{ marginBottom: '20px' }}
+          >
+            {' '}
+            Generate random valueA{' '}
+          </Button>
+        )}
+      </LightningContext.Mutator>
+      <Container>
+        <UseLightningContextHookComponent bind="valueA.a.r" />
+      </Container>
+      <UseLightningContextHookComponent bind="valueB" />
+      <UseLightningContextHookComponent bind="valueC" />
+    </LightningContext.Provider>
+  </Page>
+);
 
-const ExampleB = function () {
+const ExampleB = () => {
   const [value, setValue] = useState(defaultValue);
   return (
     <Page>
@@ -91,10 +85,6 @@ export default {
   component: ExampleA,
 };
 
-export const UsingLightingContext = function () {
-  return <ExampleA />;
-};
+export const UsingLightingContext = () => <ExampleA />;
 
-export const UsingReactContext = function () {
-  return <ExampleB />;
-};
+export const UsingReactContext = () => <ExampleB />;

@@ -1,6 +1,6 @@
 {
   "name": "react-lightning-context",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "a performant and simple react context",
   "author": "guiyep",
   "license": "MIT",
@@ -25,11 +25,11 @@
     "build-prod": "NODE_ENV=production BABEL_ENV=production rollup -c",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "eslint": "eslint --fix ./src",
+    "eslint": "eslint --fix --ext .js --ext .jsx",
     "prettier": "prettier --write",
     "eslint2": "eslint",
     "prettier2": "prettier",
-    "lint": "yarn run eslint ./src && yarn run prettier ./src ",
+    "lint": "yarn run eslint && yarn run prettier ./src",
     "lint-s": "lint-staged",
     "docs": "docsify serve docs"
   },

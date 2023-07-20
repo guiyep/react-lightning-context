@@ -53,7 +53,9 @@ const Context = createContext({ value: 'test' }, { waitBeforeUpdate: true });
 
 ### Context.Provider
 
-This does not have any props. Same as `React.Context` it wraps the context experience.
+| Properties     | Type | Required | Description                            |
+| -------------- | ---- | -------- | -------------------------------------- |
+| `initialValue` | any  | **No**   | Defaults to the initialValue if passed |
 
 #### Context.Provider Example
 
@@ -63,6 +65,17 @@ const Context = createContext({ value: 'test' });
 
 const TopLevelExperience = () => {
   return <Context.Provider>// ... your experience</Context.Provider>;
+};
+```
+
+#### Context.Provider Example with initialValue
+
+```jsx
+import { createContext } from 'react-lightning-context';
+const Context = createContext({ value: 'test' });
+
+const TopLevelExperience = () => {
+  return <Context.Provider initialValue={{...}}>// ... your experience</Context.Provider>;
 };
 ```
 
