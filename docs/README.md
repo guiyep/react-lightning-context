@@ -53,9 +53,9 @@ const Context = createContext({ value: 'test' }, { waitBeforeUpdate: true });
 
 ### Context.Provider
 
-| Properties     | Type | Required | Description                            |
-| -------------- | ---- | -------- | -------------------------------------- |
-| `initialValue` | any  | **No**   | Defaults to the initialValue if passed |
+| Properties     | Type | Required | Description                                                                                                     |
+| -------------- | ---- | -------- | --------------------------------------------------------------------------------------------------------------- |
+| `initialValue` | any  | **No**   | Defaults to the initialValue if passed, note that once the initialValue is set it won't be refreshed if updated |
 
 #### Context.Provider Example
 
