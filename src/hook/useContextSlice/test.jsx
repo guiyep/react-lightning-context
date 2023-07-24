@@ -1,8 +1,8 @@
 import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { useContextSlice } from './index';
 import { createContext } from '../../lib/create-context';
 import '@testing-library/jest-dom';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
 describe('useContextSlice', () => {
   test('to default to the initialValues and render once', () => {
@@ -37,20 +37,19 @@ describe('useContextSlice', () => {
       return <label data-testid="test">{valA}</label>;
     };
 
-    const TestUpdateContext = () => {
-      return (
-        <>
-          <Context.Provider>
-            <Context.Mutator>
-              {({ setContextValue }) => (
-                <button onClick={() => setContextValue(() => ({ valA: 333, valB: 222, dummy: numberOfRenders + 1 }))} />
-              )}
-            </Context.Mutator>
-            <UseLightningContextComponent />
-          </Context.Provider>
-        </>
-      );
-    };
+    const TestUpdateContext = () => (
+      <Context.Provider>
+        <Context.Mutator>
+          {({ setContextValue }) => (
+            <button
+              type="button"
+              onClick={() => setContextValue(() => ({ valA: 333, valB: 222, dummy: numberOfRenders + 1 }))}
+            />
+          )}
+        </Context.Mutator>
+        <UseLightningContextComponent />
+      </Context.Provider>
+    );
 
     render(<TestUpdateContext />);
 
@@ -83,23 +82,20 @@ describe('useContextSlice', () => {
       return <label data-testid="testB">{valB}</label>;
     };
 
-    const TestUpdateContext = () => {
-      return (
-        <>
-          <Context.Provider>
-            <Context.Mutator>
-              {({ setContextValue }) => (
-                <button
-                  onClick={() => setContextValue(() => ({ valA: 333, valB: 222, dummy: numberOfRendersA + 1 }))}
-                />
-              )}
-            </Context.Mutator>
-            <UseLightningContextComponentA />
-            <UseLightningContextComponentB />
-          </Context.Provider>
-        </>
-      );
-    };
+    const TestUpdateContext = () => (
+      <Context.Provider>
+        <Context.Mutator>
+          {({ setContextValue }) => (
+            <button
+              type="button"
+              onClick={() => setContextValue(() => ({ valA: 333, valB: 222, dummy: numberOfRendersA + 1 }))}
+            />
+          )}
+        </Context.Mutator>
+        <UseLightningContextComponentA />
+        <UseLightningContextComponentB />
+      </Context.Provider>
+    );
 
     render(<TestUpdateContext />);
 

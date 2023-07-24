@@ -69,3 +69,33 @@ The main idea ia following the same patterns and api that `React Context` provid
 ## Try it
 
 [![Edit react-lightning-context](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/beautiful-currying-i7xin)
+
+## Upgrading from 2.xx to 3.x.x
+
+From 2.x.x to 3.x.x I have introduced some braking changes in the result value coming from the slices you request
+
+Example code:
+
+```js
+const result = useContext({ slices: ['valueC.valueD', 'valueA'] }, Context);
+```
+
+### On 2.x.x result was
+
+```json
+{
+  "valueC.valueD": "the value",
+  "valueA": "the value"
+}
+```
+
+### Now on 3.x.x result is
+
+```json
+{
+  "valueC": {
+    "valueD": "the value"
+  },
+  "valueA": "the value"
+}
+```

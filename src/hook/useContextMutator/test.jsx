@@ -1,9 +1,9 @@
 import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { useContextMutator, useContextSliceMutator } from './index';
 import { useContext } from '../useContext';
 import { createContext } from '../../lib/create-context';
 import '@testing-library/jest-dom';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
 describe('useContextMutator', () => {
   test('to not trigger uneeded updates', async () => {
@@ -26,20 +26,21 @@ describe('useContextMutator', () => {
 
     const UseLightningContextMutatorComponent = () => {
       const setContextValue = useContextMutator(Context);
-      return <button onClick={() => setContextValue(() => ({ valA: 333, valB: 222, dummy: numberOfRendersA + 1 }))} />;
-    };
-
-    const TestUpdateContext = () => {
       return (
-        <>
-          <Context.Provider>
-            <UseLightningContextMutatorComponent />
-            <UseLightningContextComponentA />
-            <UseLightningContextComponentB />
-          </Context.Provider>
-        </>
+        <button
+          type="button"
+          onClick={() => setContextValue(() => ({ valA: 333, valB: 222, dummy: numberOfRendersA + 1 }))}
+        />
       );
     };
+
+    const TestUpdateContext = () => (
+      <Context.Provider>
+        <UseLightningContextMutatorComponent />
+        <UseLightningContextComponentA />
+        <UseLightningContextComponentB />
+      </Context.Provider>
+    );
 
     render(<TestUpdateContext />);
 
@@ -66,6 +67,7 @@ describe('useContextMutator', () => {
       const setContextValue = useContextMutator(Context);
       return (
         <button
+          type="button"
           onClick={() =>
             setContextValue((value) => {
               valueRef = value;
@@ -76,15 +78,11 @@ describe('useContextMutator', () => {
       );
     };
 
-    const TestUpdateContext = () => {
-      return (
-        <>
-          <Context.Provider>
-            <UseLightningContextMutatorComponent />
-          </Context.Provider>
-        </>
-      );
-    };
+    const TestUpdateContext = () => (
+      <Context.Provider>
+        <UseLightningContextMutatorComponent />
+      </Context.Provider>
+    );
 
     render(<TestUpdateContext />);
 
@@ -117,28 +115,16 @@ describe('useContextSliceMutator', () => {
 
     const UseLightningContextMutatorComponent = () => {
       const setContextPropValue = useContextSliceMutator('valA', Context);
-      return (
-        <button
-          onClick={() =>
-            setContextPropValue(() => {
-              return 333;
-            })
-          }
-        />
-      );
+      return <button type="button" onClick={() => setContextPropValue(() => 333)} />;
     };
 
-    const TestUpdateContext = () => {
-      return (
-        <>
-          <Context.Provider>
-            <UseLightningContextMutatorComponent />
-            <UseLightningContextComponentA />
-            <UseLightningContextComponentB />
-          </Context.Provider>
-        </>
-      );
-    };
+    const TestUpdateContext = () => (
+      <Context.Provider>
+        <UseLightningContextMutatorComponent />
+        <UseLightningContextComponentA />
+        <UseLightningContextComponentB />
+      </Context.Provider>
+    );
 
     render(<TestUpdateContext />);
 
@@ -165,6 +151,7 @@ describe('useContextSliceMutator', () => {
       const setContextPropValue = useContextSliceMutator('valA', Context);
       return (
         <button
+          type="button"
           onClick={() =>
             setContextPropValue((value) => {
               valueRef = value;
@@ -175,15 +162,11 @@ describe('useContextSliceMutator', () => {
       );
     };
 
-    const TestUpdateContext = () => {
-      return (
-        <>
-          <Context.Provider>
-            <UseLightningContextMutatorComponent />
-          </Context.Provider>
-        </>
-      );
-    };
+    const TestUpdateContext = () => (
+      <Context.Provider>
+        <UseLightningContextMutatorComponent />
+      </Context.Provider>
+    );
 
     render(<TestUpdateContext />);
 

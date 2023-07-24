@@ -1,6 +1,7 @@
 import { useContext, useLayoutEffect, useState } from 'react';
 import { addListener, removeListener } from '../../lib/pubsub';
 import { get } from '../../lib/get';
+import { set } from '../../lib/set';
 
 export const useInternalContext = ({ slices, defaultValue }, InternalContext) => {
   const { queueId, addBinding, removeLightning } = useContext(InternalContext);
@@ -27,7 +28,7 @@ export const useInternalContext = ({ slices, defaultValue }, InternalContext) =>
   // on first render, there is no value, we use the default
   if (!value) {
     const resultValue = slices.reduce((acc, currentBind) => {
-      acc[currentBind] = get(defaultValue, currentBind);
+      set(acc, currentBind, get(defaultValue, currentBind));
       return acc;
     }, {});
 
@@ -35,7 +36,7 @@ export const useInternalContext = ({ slices, defaultValue }, InternalContext) =>
   }
 
   const resultValue = slices.reduce((acc, currentBind) => {
-    acc[currentBind] = get(value, currentBind);
+    set(acc, currentBind, get(value, currentBind));
     return acc;
   }, {});
 
