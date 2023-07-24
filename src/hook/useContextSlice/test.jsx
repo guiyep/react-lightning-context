@@ -11,7 +11,7 @@ describe('useContextSlice', () => {
     let numberOfRenders = 0;
 
     const UseLightningContextComponent = () => {
-      const { valA } = useContextSlice('valA', Context);
+      const valA = useContextSlice('valA', Context);
       numberOfRenders++;
       return valA;
     };
@@ -32,7 +32,7 @@ describe('useContextSlice', () => {
     let numberOfRenders = 0;
 
     const UseLightningContextComponent = () => {
-      const { valA } = useContextSlice('valA', Context);
+      const valA = useContextSlice('valA', Context);
       numberOfRenders++;
       return <label data-testid="test">{valA}</label>;
     };
@@ -71,13 +71,13 @@ describe('useContextSlice', () => {
     let numberOfRendersB = 0;
 
     const UseLightningContextComponentA = () => {
-      const { valA } = useContextSlice('valA', Context);
+      const valA = useContextSlice('valA', Context);
       numberOfRendersA++;
       return <label data-testid="testA">{valA}</label>;
     };
 
     const UseLightningContextComponentB = () => {
-      const { valB } = useContextSlice('valB', Context);
+      const valB = useContextSlice('valB', Context);
       numberOfRendersB++;
       return <label data-testid="testB">{valB}</label>;
     };
