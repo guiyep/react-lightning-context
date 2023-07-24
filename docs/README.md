@@ -111,7 +111,10 @@ const TopLevelExperience = () => {
 if **slices** is `['value.first', 'value.seconds']` the render function that will execute is
 
 ```js
-  ({ 'value.first': 123, 'value.seconds': 333 }) => //...anything to render
+  ({ value: {
+    first: 123,
+    seconds: 333
+  } }) => //...anything to render
 ```
 
 ### useContext
@@ -126,6 +129,19 @@ Same as `Consumer` but as a Hook api (similar to the `useContext` hook)
 ```js
 import { useContext } from 'react-lightning-context';
 const result = useContext({ slices: [...] }, Context);
+```
+
+#### Return value example for the Hook
+
+if **slices** is `['value.first', 'value.seconds']` the render function that will execute is
+
+```js
+  const {
+    value: {
+      first: 123,
+      seconds: 333
+    }
+  } = useContext({ slices: ['value.first', 'value.seconds'] }, Context)
 ```
 
 ### useContextSlice
