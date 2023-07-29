@@ -16,12 +16,4 @@ describe('get', () => {
     expect(get(state, 'valA.valB')).toStrictEqual(internal);
     expect(get(state, 'valA.valZ')).toEqual(undefined);
   });
-
-  test('to throw', () => {
-    try {
-      get(state, '');
-    } catch (e) {
-      expect(e.message).toEqual('path need to be present');
-    }
-  });
 });

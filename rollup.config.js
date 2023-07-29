@@ -7,6 +7,7 @@ import gzipPlugin from 'rollup-plugin-gzip';
 import cleaner from 'rollup-plugin-cleaner';
 import json from 'rollup-plugin-json';
 import { terser } from 'rollup-plugin-terser';
+import typescript from '@rollup/plugin-typescript';
 
 import pkg from './package.json';
 
@@ -24,13 +25,14 @@ export default {
     },
   ],
   plugins: [
+    typescript(),
     external(),
     babel({
       exclude: 'node_modules/**',
       runtimeHelpers: true,
     }),
     resolve({
-      extensions: ['.mjs', '.js', '.jsx', '.json'],
+      extensions: ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx'],
     }),
     commonjs(),
     replace({

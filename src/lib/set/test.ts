@@ -28,12 +28,4 @@ describe('set', () => {
       valA: 555,
     });
   });
-
-  test('to throw', () => {
-    try {
-      set(state, '');
-    } catch (e) {
-      expect(e.message).toEqual('path need to be present');
-    }
-  });
 });

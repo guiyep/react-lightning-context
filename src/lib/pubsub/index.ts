@@ -1,6 +1,7 @@
 import { uuid } from '../uuid';
+import type { QueueStore, Listener } from './types';
 
-let queues = {};
+let queues: QueueStore = {};
 
 export const initialize = () => {
   const uniqueId = uuid();
@@ -9,11 +10,13 @@ export const initialize = () => {
     throw Error(`init queue with uuid ${uniqueId} caused a collision`);
   }
 
-  queues[uniqueId] = {};
+  queues[uniqueId] = {
+    listeners: {},
+  };
   return uniqueId;
 };
 
-export const publish = ({ queueId, key, event }) => {
+export const publish = ({ queueId, key, event }: { queueId: string; key: string; event: any }) => {
   if (
     !queues[queueId] ||
     (queues[queueId] && !queues[queueId].listeners) ||
@@ -25,7 +28,7 @@ export const publish = ({ queueId, key, event }) => {
   queues[queueId].listeners[key].forEach((listener) => listener(event));
 };
 
-export const addListener = ({ queueId, key, listener }) => {
+export const addListener = ({ queueId, key, listener }: Listener) => {
   if (!queues[queueId]) {
     return;
   }
@@ -41,7 +44,7 @@ export const addListener = ({ queueId, key, listener }) => {
   queues[queueId].listeners[key].push(listener);
 };
 
-export const removeListener = ({ queueId, key, listener }) => {
+export const removeListener = ({ queueId, key, listener }: Listener) => {
   if (
     !queues[queueId] ||
     (queues[queueId] && !queues[queueId].listeners) ||
@@ -62,11 +65,11 @@ export const flush = () => {
   queues = {};
 };
 
-export const flushQueue = ({ queueId }) => {
+export const flushQueue = ({ queueId }: { queueId: string }): void => {
   delete queues[queueId];
 };
 
-const deepFreeze = (obj) => {
+const deepFreeze = (obj: any) => {
   Object.keys(obj).forEach((prop) => {
     if (typeof obj[prop] === 'object' && !Object.isFrozen(obj[prop])) deepFreeze(obj[prop]);
   });

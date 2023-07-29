@@ -44,21 +44,6 @@ export const createContext = (defaultValue, { waitBeforeUpdate } = { waitBeforeU
         }
       }, []);
 
-      const setContextValue = useCallback(
-        (f) => {
-          const val = f(valueRef.current);
-          onPublishEvents(val);
-        },
-        [onPublishEvents],
-      );
-
-      const contextRef = useRef({
-        queueId,
-        addBinding,
-        removeLightning,
-        setContextValue,
-      });
-
       const onPublishEvents = useDebouncedCallback((nextValue) => {
         const bindings = bindingsRef.current;
         const oldValue = valueRef.current;
@@ -81,6 +66,21 @@ export const createContext = (defaultValue, { waitBeforeUpdate } = { waitBeforeU
 
         valueRef.current = nextValue;
       }, waitBeforeUpdate);
+
+      const setContextValue = useCallback(
+        (f) => {
+          const val = f(valueRef.current);
+          onPublishEvents(val);
+        },
+        [onPublishEvents],
+      );
+
+      const contextRef = useRef({
+        queueId,
+        addBinding,
+        removeLightning,
+        setContextValue,
+      });
 
       useLayoutEffect(() => {
         if (contextRef.current === undefined || initialValue !== undefined) {
