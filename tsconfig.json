@@ -18,7 +18,8 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "strictNullChecks": false,
-    "strict": true
+    "strict": true,
+    "lib": ["dom", "esnext"]
   },
   "include": ["./src/**/*", "./**/*", "./"]
 }
