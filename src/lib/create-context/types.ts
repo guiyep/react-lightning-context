@@ -1,4 +1,4 @@
-import { FC, ReactNode, Context, ReactElement } from 'react';
+import { FC, ReactNode, Context as ReactContext, ReactElement } from 'react';
 import { INTERNAL } from '../constants';
 
 export type InternalContextTypes = {
@@ -10,13 +10,15 @@ export type InternalContextTypes = {
 
 export type CreateContextOptions = { waitBeforeUpdate: boolean };
 
-export type CreateContextResult<T1> = {
-  Provider: FC<{ children: ReactNode; initialValue?: T1 }>;
-  Mutator: FC<{ children: (props: { setContextValue: (f: (val: T1) => T1) => void }) => ReactElement }>;
-  Consumer: FC<{ slices: string[]; children: (val: T1) => ReactElement }>;
+export type SetContextValueFunction<StateShape> = (f: (val: StateShape) => StateShape) => void;
+
+export type Context<StateShape> = {
+  Provider: FC<{ children: ReactNode; initialValue?: StateShape }>;
+  Mutator: FC<{ children: (props: { setContextValue: SetContextValueFunction<StateShape> }) => ReactElement }>;
+  Consumer: FC<{ slices: string[]; children: (val: StateShape) => ReactElement }>;
   [INTERNAL]: {
-    InternalContext: Context<InternalContextTypes>;
-    defaultValue: T1;
+    InternalContext: ReactContext<InternalContextTypes>;
+    defaultValue: StateShape;
   };
   displayName: string | undefined;
 };

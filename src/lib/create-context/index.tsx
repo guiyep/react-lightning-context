@@ -14,7 +14,7 @@ import { INTERNAL } from '../constants';
 import { useInternalContext } from '../../hook/useInternalContext';
 import { useDebouncedCallback as useDebouncedCallbackHook } from '../../hook/useDebouncedCallback';
 
-import type { CreateContextOptions, InternalContextTypes, CreateContextResult } from './types';
+import type { CreateContextOptions, InternalContextTypes, Context as CreateContextResult } from './types';
 
 const useDebouncedDisabledCallback =
   <T1,>(f: (val: T1) => void) =>
