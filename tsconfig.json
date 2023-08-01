@@ -1,11 +1,8 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "declarationMap": true,
     "target": "es6",
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "allowJs": true,

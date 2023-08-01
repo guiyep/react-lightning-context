@@ -6,6 +6,7 @@
   "license": "MIT",
   "repository": "guiyep/react-lightning-context",
   "main": "dist/index.min.js",
+  "types": "dist/index.d.ts",
   "engines": {
     "node": ">=9",
     "npm": ">=6"
@@ -91,6 +92,7 @@
     "rollup-plugin-babel-minify": "10.0.0",
     "rollup-plugin-cleaner": "1.0.0",
     "rollup-plugin-commonjs": "10.1.0",
+    "rollup-plugin-dts": "^5.3.1",
     "rollup-plugin-gzip": "3.0.0",
     "rollup-plugin-json": "4.0.0",
     "rollup-plugin-node-resolve": "5.2.0",

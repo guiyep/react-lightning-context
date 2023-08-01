@@ -8,12 +8,13 @@ import cleaner from 'rollup-plugin-cleaner';
 import json from 'rollup-plugin-json';
 import { terser } from 'rollup-plugin-terser';
 import typescript from '@rollup/plugin-typescript';
+import { dts } from 'rollup-plugin-dts';
 
 import pkg from './package.json';
 
 const isProd = process.env.NODE_ENV === 'production';
 
-export default {
+const configLibrary = {
   input: 'src/index.js',
   output: [
     {
@@ -50,3 +51,11 @@ export default {
       }),
   ],
 };
+
+const configTypes = {
+  input: 'src/index.js',
+  output: [{ file: 'dist/index.d.ts', format: 'es' }],
+  plugins: [dts()],
+};
+
+export default [configLibrary, configTypes];
