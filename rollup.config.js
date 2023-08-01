@@ -15,7 +15,7 @@ import pkg from './package.json';
 const isProd = process.env.NODE_ENV === 'production';
 
 const configLibrary = {
-  input: 'src/index.js',
+  input: 'src/index.ts',
   output: [
     {
       file: pkg.main,
@@ -53,7 +53,7 @@ const configLibrary = {
 };
 
 const configTypes = {
-  input: 'src/index.js',
+  input: 'src/index.ts',
   output: [{ file: 'dist/index.d.ts', format: 'es' }],
   plugins: [dts()],
 };

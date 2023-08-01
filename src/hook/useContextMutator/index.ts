@@ -4,20 +4,22 @@ import { get } from '../../lib/get';
 import { INTERNAL } from '../../lib/constants';
 import type { Context as ContextType, SetContextValueFunction } from '../../lib/create-context/types';
 
-export const useContextMutator = <T1,>(Context: ContextType<T1>) => {
+export const useContextMutator = <ContextShape>(
+  Context: ContextType<ContextShape>,
+): SetContextValueFunction<ContextShape> => {
   const { setContextValue } = useContext(Context[INTERNAL].InternalContext);
   return setContextValue;
 };
 
-export const useContextSliceMutator = <StateShape, SliceShape>(
+export const useContextSliceMutator = <ContextShape, SliceShape>(
   slice: string,
-  Context: ContextType<StateShape>,
+  Context: ContextType<ContextShape>,
 ): SetContextValueFunction<SliceShape> => {
   const { setContextValue } = useContext(Context[INTERNAL].InternalContext);
 
   const setContextPropValue = useCallback(
     (f) => {
-      setContextValue((value: StateShape) => {
+      setContextValue((value: ContextShape) => {
         const newVal = { ...value };
         return set(newVal, slice, f(get(value, slice)));
       });

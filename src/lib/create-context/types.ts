@@ -10,15 +10,15 @@ export type InternalContextTypes = {
 
 export type CreateContextOptions = { waitBeforeUpdate: boolean };
 
-export type SetContextValueFunction<StateShape> = (f: (val: StateShape) => StateShape) => void;
+export type SetContextValueFunction<ContextShape> = (f: (val: ContextShape) => ContextShape) => void;
 
-export type Context<StateShape> = {
-  Provider: FC<{ children: ReactNode; initialValue?: StateShape }>;
-  Mutator: FC<{ children: (props: { setContextValue: SetContextValueFunction<StateShape> }) => ReactElement }>;
-  Consumer: FC<{ slices: string[]; children: (val: StateShape) => ReactElement }>;
+export type Context<ContextShape> = {
+  Provider: FC<{ children: ReactNode; initialValue?: ContextShape }>;
+  Mutator: FC<{ children: (props: { setContextValue: SetContextValueFunction<ContextShape> }) => ReactElement }>;
+  Consumer: FC<{ slices: string[]; children: (val: any) => ReactElement }>;
   [INTERNAL]: {
     InternalContext: ReactContext<InternalContextTypes>;
-    defaultValue: StateShape;
+    defaultValue: ContextShape;
   };
   displayName: string | undefined;
 };
