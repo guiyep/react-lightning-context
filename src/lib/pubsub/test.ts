@@ -17,7 +17,7 @@ describe('pub sub', () => {
 
   test('initialize', () => {
     expect(initialize()).toEqual('123-uuid');
-    expect(getQueue()).toEqual({ '123-uuid': {} });
+    expect(getQueue()).toEqual({ '123-uuid': { listeners: {} } });
   });
 
   test('addListener', () => {

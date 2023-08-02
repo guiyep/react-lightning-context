@@ -1,11 +1,13 @@
 {
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb-typescript", "prettier", "plugin:import/recommended"],
   "parserOptions": {
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "project": ["./tsconfig.json"]
   },
+  "ignorePatterns": ["./rollup.config.js", "./jest.config.ts"],
   "plugins": ["prettier", "react", "react-hooks"],
   "rules": {
     "prettier/prettier": [

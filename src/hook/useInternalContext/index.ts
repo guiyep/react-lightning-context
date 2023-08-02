@@ -1,14 +1,18 @@
-import { useContext, useLayoutEffect, useState } from 'react';
+import { useContext, useLayoutEffect, useState, Context as ReactContext } from 'react';
 import { addListener, removeListener } from '../../lib/pubsub';
+import type { InternalContextTypes } from '../../lib/create-context/types';
 import { get } from '../../lib/get';
 import { set } from '../../lib/set';
 
-export const useInternalContext = ({ slices, defaultValue }, InternalContext) => {
+export const useInternalContext = <ContextShape, ResultShape>(
+  { slices, defaultValue }: { slices: string[]; defaultValue: ContextShape },
+  InternalContext: ReactContext<InternalContextTypes>,
+): ResultShape => {
   const { queueId, addBinding, removeLightning } = useContext(InternalContext);
   const [value, setValue] = useState(undefined);
 
   useLayoutEffect(() => {
-    const onListenerCall = ({ newValue }) => {
+    const onListenerCall = ({ newValue }: { newValue: any }) => {
       setValue(newValue);
     };
 
@@ -30,7 +34,7 @@ export const useInternalContext = ({ slices, defaultValue }, InternalContext) =>
     const resultValue = slices.reduce((acc, currentBind) => {
       set(acc, currentBind, get(defaultValue, currentBind));
       return acc;
-    }, {});
+    }, {} as ResultShape);
 
     return resultValue;
   }
@@ -38,7 +42,7 @@ export const useInternalContext = ({ slices, defaultValue }, InternalContext) =>
   const resultValue = slices.reduce((acc, currentBind) => {
     set(acc, currentBind, get(value, currentBind));
     return acc;
-  }, {});
+  }, {} as ResultShape);
 
   return resultValue;
 };

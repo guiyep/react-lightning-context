@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { useContextMutator, useContextSliceMutator } from './index';
 import { useContext } from '../useContext';
@@ -69,7 +69,7 @@ describe('useContextMutator', () => {
         <button
           type="button"
           onClick={() =>
-            setContextValue((value) => {
+            setContextValue((value: any) => {
               valueRef = value;
               return { valA: 333, valB: 222 };
             })

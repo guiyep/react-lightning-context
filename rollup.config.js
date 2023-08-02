@@ -7,13 +7,15 @@ import gzipPlugin from 'rollup-plugin-gzip';
 import cleaner from 'rollup-plugin-cleaner';
 import json from 'rollup-plugin-json';
 import { terser } from 'rollup-plugin-terser';
+import typescript from '@rollup/plugin-typescript';
+import { dts } from 'rollup-plugin-dts';
 
 import pkg from './package.json';
 
 const isProd = process.env.NODE_ENV === 'production';
 
-export default {
-  input: 'src/index.js',
+const configLibrary = {
+  input: 'src/index.ts',
   output: [
     {
       file: pkg.main,
@@ -24,13 +26,14 @@ export default {
     },
   ],
   plugins: [
+    typescript(),
     external(),
     babel({
       exclude: 'node_modules/**',
       runtimeHelpers: true,
     }),
     resolve({
-      extensions: ['.mjs', '.js', '.jsx', '.json'],
+      extensions: ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx'],
     }),
     commonjs(),
     replace({
@@ -48,3 +51,11 @@ export default {
       }),
   ],
 };
+
+const configTypes = {
+  input: 'src/index.ts',
+  output: [{ file: 'dist/index.d.ts', format: 'es' }],
+  plugins: [dts()],
+};
+
+export default [configLibrary, configTypes];

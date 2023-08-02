@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from 'react';
+import * as React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { useContextReducer } from './index';
 import { useContext } from '../useContext';
@@ -25,7 +25,7 @@ describe('useContextReducer', () => {
       return <label data-testid="testB">{valB}</label>;
     };
 
-    function reducer(state, action) {
+    function reducer(_: any, action: { type: string }) {
       switch (action.type) {
         case 'update':
           return { valA: 333, valB: 222, dummy: numberOfRendersA + 1 };

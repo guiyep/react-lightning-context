@@ -2,18 +2,24 @@ import { useContext, useCallback } from 'react';
 import { set } from '../../lib/set';
 import { get } from '../../lib/get';
 import { INTERNAL } from '../../lib/constants';
+import type { Context as ContextType, SetContextValueFunction } from '../../lib/create-context/types';
 
-export const useContextMutator = (Context) => {
+export const useContextMutator = <ContextShape>(
+  Context: ContextType<ContextShape>,
+): SetContextValueFunction<ContextShape> => {
   const { setContextValue } = useContext(Context[INTERNAL].InternalContext);
   return setContextValue;
 };
 
-export const useContextSliceMutator = (slice, Context) => {
+export const useContextSliceMutator = <ContextShape, SliceShape>(
+  slice: string,
+  Context: ContextType<ContextShape>,
+): SetContextValueFunction<SliceShape> => {
   const { setContextValue } = useContext(Context[INTERNAL].InternalContext);
 
   const setContextPropValue = useCallback(
     (f) => {
-      setContextValue((value) => {
+      setContextValue((value: ContextShape) => {
         const newVal = { ...value };
         return set(newVal, slice, f(get(value, slice)));
       });

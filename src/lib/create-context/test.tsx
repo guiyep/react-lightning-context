@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { createContext } from './index';
 import { INTERNAL } from '../constants';
@@ -33,7 +33,7 @@ describe('createContext', () => {
         <Context.Consumer slices={['valA']}>
           {({ valA }) => {
             numberOfRenders++;
-            return valA;
+            return <div>{valA}</div>;
           }}
         </Context.Consumer>
       </Context.Provider>,
@@ -53,7 +53,7 @@ describe('createContext', () => {
         <Context.Consumer slices={['valA']}>
           {({ valA }) => {
             numberOfRenders++;
-            return valA;
+            return <div>{valA}</div>;
           }}
         </Context.Consumer>
       </Context.Provider>,
